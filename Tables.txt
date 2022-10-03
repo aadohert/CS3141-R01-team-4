@@ -1,4 +1,4 @@
 Tables in Database:
 Users: primary key string username, hashed string password
-Stars: primary key String name, double rightAngle, double angleOfDeclination, text description  
+Stars: primary key String name, double not null rightAngle, double not null angleOfDeclination, String constilation, text description  
 Favorites: foreign key string username, foreign key string starName
