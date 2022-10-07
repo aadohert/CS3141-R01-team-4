@@ -6,5 +6,27 @@ function connectDB() {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbh;
 }
+
+function findStar() {
+
+}
+
+function daysSince2000() {
+
+}
+
+function hoursIntoMinutes() {
+
+}
+
+function localSiderealTime() {
+
+}
+
+function getLongitude() {
+
+}
+
+
 ?>
 </html> 
