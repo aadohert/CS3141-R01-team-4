@@ -27,6 +27,25 @@ function getLongitude() {
 
 }
 
+function getLattitude() {
+
+}
+
+function getUniversalTime() {
+
+}
+
+function hourAngle() {
+
+}
+
+function altitude() {
+
+}
+
+function azimuth() {
+    
+}
 
 ?>
 </html> 
