@@ -9,8 +9,8 @@ function connectDB() {
 
 function authenticate($user, $passwd) {
     $dbh = connectDB();
-    $statement = $dbh->prepare("SELECT count(*) FROM t_user ".
-    "where username = :username and passwd = sha2(:passwd,256) ");
+    $statement = $dbh->prepare("SELECT count(*) FROM t_users "
+    ."where username = :username and passwd = sha2(:passwd,256) ");
     $statement->bindParam(":username", $user);
     $statement->bindParam(":passwd", $passwd);
     $result = $statement->execute();
