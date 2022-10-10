@@ -1,0 +1,22 @@
+Create table t_users ( 
+username varchar(50) NOT NULL,
+passwd varchar(256) not null,
+PRIMARY KEY (`id`)
+);
+
+create table  t_stars (
+name varchar(256) not null,
+r_ang decimal[361,4] not null,
+dec_ang decimal[361,4] not null,
+const varchar(256),
+desc text
+PRIMARY KEY (name)
+);
+
+
+create table t_favorites (
+f_username varchar(50) NOT NULL ,
+f_star varchar(256) not null,
+forign key(f_username) references t_users(username),
+forign key(f_star) references t_stars(name)
+);
