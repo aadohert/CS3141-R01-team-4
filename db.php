@@ -25,10 +25,9 @@ function findStar() {
 }
 
 function daysSince2000() {
-    $firstDate = '01-01-2000';
-    $today = date('d-m-y', strtotime("now"));
-    $days = strtotime($today) - strtotime($firstDate);
-    return abs(round($days));
+    $days = strtotime("now") - strtotime('01-01-2000');
+    $days = $days / 86400;
+    return $days;
 }
 
 function hoursIntoMinutes($hour) {
@@ -36,7 +35,17 @@ function hoursIntoMinutes($hour) {
 }
 
 function localSiderealTime() {
+    $lst = 100.46 + (0.985647 * daysSince2000()) + getLongitude() + (15 * getTimeInHours());
+    
+    while($lst > 360) {
+        $lst = $lst - 360;
+    }
 
+    while($lst < 360) {
+        $lst = $lst + 360;
+    }
+
+    return $lst;
 }
 
 function getLongitude() {
@@ -45,10 +54,6 @@ function getLongitude() {
 
 function getLatitude() {
     return 47.1150;
-}
-
-function getUniversalTime() {
-    return gmdate("M d Y H:i:s");
 }
 
 function hourAngle() {
@@ -61,6 +66,14 @@ function altitude() {
 
 function azimuth() {
 
+}
+
+function getTimeInHours() {
+    $hour = gmdate("H");
+    $minute = gmdate("i") / 60;
+    $second = gmdate("s") / 3600;
+    $allTime = $hour + $minute + $second;
+    return $allTime;
 }
 
 ?>
