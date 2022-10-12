@@ -41,26 +41,10 @@
     </head>
 
     <body>
-            <!-- This div is used for setting up the table for the navigation bar.  -->
-            <div>
-                <table class="navbar-table" width="100%">
-                    <col style="width: 70%">
-                    <col style="width: 20%">
-                    <col style="width: 10%">
-                    <tr>
-                        <th id="Icon"><h1><a href="/Index.php" style="margin-left: 15px;">Star Finder</a></h1></th>
-                        <?php
-                            if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><h3><a href="/Favorites.php">'.$_SESSION["user"].'\'s Favorites</a></h3></th>';
-                            else echo '<th class="navbar-right-align"><h3><a href="/Login.php">Favorites</a></h3></th>';
-                        
-                             
-                            if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><button onclick="location.href = \'logout.php\';" style="background-image: url(\'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjrCdY7vbLNb3uuqCixRviazh7zdc0yUSB3Ou2w27iCQRKN6T1ylCGuCs1YXkTOQBTjzM&usqp=CAU\'); color:white; cursor:pointer; width:75px;height:35px;">Log Out</button></th>';
-                            else echo '<th class="navbar-right-align"><button onclick="location.href = \'login.php\';" style="background-image: url(\'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjrCdY7vbLNb3uuqCixRviazh7zdc0yUSB3Ou2w27iCQRKN6T1ylCGuCs1YXkTOQBTjzM&usqp=CAU\'); color:white; cursor:pointer; width:75px;height:35px;">Login</button></th>';
-                        ?>
-
-                    </tr>
-                </table>
-            </div>
+            <?php 
+                printTopBanner();
+            ?>
+            
             <hr>
 
                 <form method="post" action="login.php">
