@@ -122,11 +122,30 @@ function azimuthWhenGivenName($starName) {
 }
 
 function altitudeWhenGivenCoords($givenRa, $givenDec) {
-
+    $sinDec = sin($givenDec);
+    $sinLat = sin(getLatitude());
+    $cosDec = cos($givenDec);
+    $cosLat = cos(getLatitude());
+    $cosHa = cos(hourAngleWhenGivenRa($givenRa));
+    $sinAlt = (($sinDec * $sinLat) + ($cosDec * $cosLat * $cosHa));
+    return asin($sinAlt);
 }
 
 function azimuthWhenGivenCoords($givenRa, $givenDec) {
+    $sinHa = sin(hourAngleWhenGivenRa($givenRa));
+    $alt = altitudeWhenGivenCoords($givenRa, $givenDec);
+    if($sinHa < 0) {
+        return $alt;
+    }
 
+    $sinDec = sin($givenDec);
+    $sinAlt = sin($alt);
+    $sinLat = sin(getLatitude());
+    $cosAlt = cos($alt);
+    $cosLat = cos(getLatitude());
+    $cosAzi = (($sinDec - ($sinAlt * $sinLat)) / ($cosAlt * $cosLat));
+    $Azi = acos($cosAzi);
+    return $Azi;
 }
 
 function raWithName($starName) {

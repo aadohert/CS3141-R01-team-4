@@ -1,11 +1,11 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="eng">
     <header> 
             <?php 
                 require "db.php";
-
-                session_start();
-
             ?>
     <header>
     <head>
