@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="eng">
+    <header> 
+            <?php 
+                require "db.php";
+
+                session_start();
+
+            ?>
+    <header>
     <head>
         <style>
             a:visited{
@@ -29,13 +37,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
-        <?php 
-        require "db.php";
-
-        session_start();
-
-
-        ?>
 
     </head>
 
