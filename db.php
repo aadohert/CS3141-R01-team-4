@@ -20,15 +20,10 @@ function authenticate($user, $passwd) {
 
 }
 
-function findStar() {
-
-}
-
 function daysSince2000() {
-    $firstDate = '01-01-2000';
-    $today = date('d-m-y', strtotime("now"));
-    $days = strtotime($today) - strtotime($firstDate);
-    return abs(round($days));
+    $days = strtotime("now") - strtotime('01-01-2000');
+    $days = $days / 86400;
+    return $days;
 }
 
 function hoursIntoMinutes($hour) {
@@ -36,7 +31,17 @@ function hoursIntoMinutes($hour) {
 }
 
 function localSiderealTime() {
+    $lst = 100.46 + (0.985647 * daysSince2000()) + getLongitude() + (15 * getTimeInHours());
+    
+    while($lst > 360) {
+        $lst = $lst - 360;
+    }
 
+    while($lst < 360) {
+        $lst = $lst + 360;
+    }
+
+    return $lst;
 }
 
 function getLongitude() {
@@ -47,20 +52,92 @@ function getLatitude() {
     return 47.1150;
 }
 
-function getUniversalTime() {
-    return gmdate("M d Y H:i:s");
+function hourAngleWhenGivenRa($givenRa) {
+    $HA = localSiderealTime() - $givenRa;
+    if($HA < 0) {
+        $HA = $HA + 360;
+    } 
+    return $HA;
 }
 
-function hourAngle() {
+function hourAngleWhenGivenName($starName) {
+    $HA = localSiderealTime() - raWithName($starName);
+    if($HA < 0) {
+        $HA = $HA + 360;
+    } 
+    return $HA;
+}
+
+function altitudeWhenGivenName($starName) {
+    $sinDec = sin(decWithName($starName));
+    $sinLat = sin(getLatitude());
+    $cosDec = cos(decWithName($starName));
+    $cosLat = cos(getLatitude());
+    $cosHa = cos(hourAngleWhenGivenName($starName));
+    $sinAlt = (($sinDec * $sinLat) + ($cosDec * $cosLat * $cosHa));
+    return asin($sinAlt);
+}
+
+function azimuthWhenGivenName($starName) {
+    $sinHa = sin(hourAngleWhenGivenName($starName));
+    $alt = altitudeWhenGivenName($starName);
+    if($sinHa < 0) {
+        return $alt;
+    }
+
+    $sinDec = sin(decWithName($starName));
+    $sinAlt = sin($alt);
+    $sinLat = sin(getLatitude());
+    $cosAlt = cos($alt);
+    $cosLat = cos(getLatitude());
+    $cosAzi = (($sinDec - ($sinAlt * $sinLat)) / ($cosAlt * $cosLat));
+    $Azi = acos($cosAzi);
+}
+
+function altitudeWhenGivenCoords($givenRa, $givenDec) {
 
 }
 
-function altitude() {
+function azimuthWhenGivenCoords($givenRa, $givenDec) {
 
 }
 
-function azimuth() {
+function raWithName($starName) {
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT r_ang FROM t_stars "
+    ."where name = :name");
+    $statement->bindParam(":name", $starName);
+    $result = $statement->execute();
+    $row=$statement->fetch();
+    $dbh=null;
+    return $row[0];
+}
 
+function decWithName($starName) {
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT dec_ang FROM t_stars "
+    ."where name = :name");
+    $statement->bindParam(":name", $starName);
+    $result = $statement->execute();
+    $row=$statement->fetch();
+    $dbh=null;
+    return $row[0];
+}
+
+function raWhenGivenRa($ra) {
+    return $ra;
+}
+
+function decWhenGivenDec($dec) {
+    return $dec;
+}
+
+function getTimeInHours() {
+    $hour = gmdate("H");
+    $minute = gmdate("i") / 60;
+    $second = gmdate("s") / 3600;
+    $allTime = $hour + $minute + $second;
+    return $allTime;
 }
 
 ?>
