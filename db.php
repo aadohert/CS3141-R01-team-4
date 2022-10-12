@@ -96,7 +96,7 @@ function azimuthWhenGivenName($starName) {
 }
 
 function altitudeWhenGivenCoords($givenRa, $givenDec) {
-
+    
 }
 
 function azimuthWhenGivenCoords($givenRa, $givenDec) {
