@@ -92,6 +92,7 @@ function azimuthWhenGivenName($starName) {
     $cosLat = cos(getLatitude());
     $cosAzi = (($sinDec - ($sinAlt * $sinLat)) / ($cosAlt * $cosLat));
     $Azi = acos($cosAzi);
+    return $Azi;
 }
 
 function altitudeWhenGivenCoords($givenRa, $givenDec) {
