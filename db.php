@@ -23,7 +23,7 @@ function authenticate($user, $passwd) {
 function printTopBanner() {
     echo 
     '<div> 
-        <table class="navbar-table" width="100%">
+        <table class="navbar-table" width="100%" style="margin-top:15px;">
             <col style = "width: 70%">
             <col style="width: 20%">
             <col style="width: 10%">
