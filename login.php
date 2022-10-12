@@ -1,13 +1,10 @@
 <?php
     session_start();
+    require "db.php";
 ?>
 <!DOCTYPE html>
 <html lang="eng">
-    <header> 
-            <?php 
-                require "db.php";
-            ?>
-    <header>
+
     <head>
         <style>
             a:visited{
@@ -44,7 +41,7 @@
             <?php 
                 printTopBanner();
             ?>
-            
+
             <hr>
 
                 <form method="post" action="login.php">

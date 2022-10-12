@@ -1,16 +1,11 @@
 <?php
     session_start();
+    require "db.php";
 ?>
 <!DOCTYPE html>
 <html lang="eng">
     
-    <header> 
-        <?php 
-            require "db.php";
 
-
-        ?>
-    <header>
     <head>
         <style>
             a:visited{
