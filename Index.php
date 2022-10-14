@@ -7,30 +7,7 @@
     
 
     <head>
-        <style>
-            a:visited{
-                text-decoration: none;
-                color: black;
-            }
-            a{
-                text-decoration: none;
-            }
-            th#Icon{
-                text-align: left;
-            }
-            th.navbar-right-align{
-                text-align: right;
-            }
-            .form-group{
-                margin-bottom: 10px;
-            }
-            #starNameDiv{
-                margin-bottom: 75px;
-            }
-            .divOffSet{
-                margin-left: 15px;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
         <title>Star Finder</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -70,5 +47,17 @@
                     </div>  
                 </form>
             </div>
+            <script>
+                function darkmode(){
+                    var element = document.body;
+                    if(element.className == "light-mode"){
+                        element.className = "dark-mode";
+                    }
+                    else{
+                        element.className = "light-mode";
+                    }
+
+                }
+            </script>
     </body>
 </html>
