@@ -49,8 +49,15 @@ function printTopBanner() {
 
 }
 
-function daysSince2000() {
-    $days = strtotime("now") - strtotime('01-01-2000');
+//This function determines how many days it has been since January 1st 2000 in order to get the local sidereal day
+function daysSince2000($date) {
+    if (isset($date)) {
+        $dayToCalculate = $date;
+    }
+    else {
+    $dayToCalculate = strtotime("now");
+    }
+    $days = $dayToCalculate - strtotime('01-01-2000');
     $days = $days / 86400;
     return $days;
 }
@@ -60,7 +67,7 @@ function hoursIntoMinutes($hour) {
 }
 
 function localSiderealTime() {
-    $lst = 100.46 + (0.985647 * daysSince2000()) + getLongitude() + (15 * getTimeInHours());
+    $lst = 100.46 + (0.985647 * daysSince2000(null)) + getLongitude() + (15 * getTimeInHours());
     
     while($lst > 360) {
         $lst = $lst - 360;
