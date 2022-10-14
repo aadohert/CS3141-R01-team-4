@@ -21,8 +21,18 @@ function authenticate($user, $passwd) {
 }
 
 function createUser($user, $passwd) {
-    $dbh = connectDB();
-    $statement = $dbh->prepare("INSERT into t_users VALUES ( :username, sha2(:passwd, 256) )");
+    try {
+        $dbh = connectDB();
+        $statement = $dbh->prepare("INSERT into t_users VALUES ( :username, sha2(:passwd, 256) )");
+        $statement->bindParam(":username", $user);
+        $statement->bindParam(":passwd", $passwd);
+        $statement->execute();
+
+        return $user;
+    }
+    catch (Exception $e) {
+        echo '<p style="color:red">that username is already taken, please try another one</p>';
+    }
 }
 
 function printTopBanner() {

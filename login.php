@@ -46,17 +46,20 @@
 
                 <form method="post" action="login.php">
 
-                <label for="username"><strong>username: </strong></label> 
+                <label for="username"><strong>username: <br></strong></label> 
                 <input type="text" id="username" name="username"> 
                 <br> <br>
 
-                <label for="password"><strong>password: </strong></label> 
+                <label for="password"><strong>password: <br></strong></label> 
                 <input type="password" id="password" name="password">
                 <br> <br>
 
                 <input type="submit" name="login" value="login">
 
                 </form>
+                <p> 
+                No account? <a href="/createAccount.php">Click here to create one!<a>
+                </p>    
 
                 <?php
                     if(isset($_POST["login"])) {
