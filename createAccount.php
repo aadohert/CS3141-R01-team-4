@@ -1,10 +1,12 @@
 <?php
     session_start();
     require "db.php";
+?>
+    
+<!-- css here -->
 
+<?php
     printTopBanner();
-
-
     if(isset($_POST["create"])) {
         if($_POST["password1"] == $_POST["password2"]) {
             $_SESSION["user"] = createUser($_POST["username"], $_POST["password1"]);
@@ -14,9 +16,7 @@
     }
 ?>
 
-
-
-<form method="post" action="test2.php">
+<form method="post" action="createAccount.php">
 
 <label for="username"><strong>username:<br> </strong></label> 
 <input type="text" id="username" name="username"> 
@@ -34,3 +34,4 @@
 
 
 </form>
+

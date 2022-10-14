@@ -21,8 +21,18 @@ function authenticate($user, $passwd) {
 }
 
 function createUser($user, $passwd) {
-    $dbh = connectDB();
-    $statement = $dbh->prepare("INSERT into t_users VALUES ( :username, sha2(:passwd, 256) )");
+    try {
+        $dbh = connectDB();
+        $statement = $dbh->prepare("INSERT into t_users VALUES ( :username, sha2(:passwd, 256) )");
+        $statement->bindParam(":username", $user);
+        $statement->bindParam(":passwd", $passwd);
+        $statement->execute();
+
+        return $user;
+    }
+    catch (Exception $e) {
+        echo '<p style="color:red">that username is already taken, please try another one</p>';
+    }
 }
 
 function printTopBanner() {
@@ -30,16 +40,18 @@ function printTopBanner() {
     '<div> 
         <table class="navbar-table" width="100%">
             <col style = "width: 70%">
-            <col style="width: 20%">
+            <col style="width: 15%">
+            <col style="width: 5%">
             <col style="width: 10%">
             <tr> 
-                <th id="Icon"><h1><a href="/Index.php" style="margin-left: 15px;">Star Finder</a></h1></th>';
+                <th id="Icon"><h1><a href="/Index.php" style="margin-left: 15px;" id="a-style">Star Finder</a></h1></th>
+                <th class="switch"><form><input type="checkbox" name="sldr" id="slider" onchange="darkmode()"></form></th>';
 
-    if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><h3><a href="/Favorites.php">'.$_SESSION["user"].'\'s Favorites</a></h3></th>';
-    else echo '<th class="navbar-right-align"><h3><a href="/Login.php">Favorites</a></h3></th>';
+    if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><h3><a href="/Favorites.php" id="a-style">'.$_SESSION["user"].'\'s Favorites</a></h3></th>';
+    else echo '<th class="navbar-right-align"><h3><a href="/Login.php" id="a-style">Favorites</a></h3></th>';
         
              
-    if(isset($_SESSION["user"])) echo '<th class="navbar-right-align" style="vertical-align: top;"><button onclick="location.href = \'logout.php\';" style="background-image: url(\'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjrCdY7vbLNb3uuqCixRviazh7zdc0yUSB3Ou2w27iCQRKN6T1ylCGuCs1YXkTOQBTjzM&usqp=CAU\'); color:white; cursor:pointer; width:75px;height:35px;">Log Out</button></th>';
+    if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><button onclick="location.href = \'logout.php\';" style="background-image: url(\'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjrCdY7vbLNb3uuqCixRviazh7zdc0yUSB3Ou2w27iCQRKN6T1ylCGuCs1YXkTOQBTjzM&usqp=CAU\'); color:white; cursor:pointer; width:75px;height:35px;">Log Out</button></th>';
     else echo '<th class="navbar-right-align" style="vertical-align: top;"><button onclick="location.href = \'login.php\';" style="background-image: url(\'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjrCdY7vbLNb3uuqCixRviazh7zdc0yUSB3Ou2w27iCQRKN6T1ylCGuCs1YXkTOQBTjzM&usqp=CAU\'); color:white; cursor:pointer; width:75px;height:35px;">Login</button></th>';
         
     echo 

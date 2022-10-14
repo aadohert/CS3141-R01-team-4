@@ -1,0 +1,59 @@
+#a-style:visited{
+    text-decoration: none;
+    color: black;
+}
+#a-style{
+    text-decoration: none;
+}
+th#Icon{
+    text-align: left;
+}
+th.navbar-right-align{
+    text-align: right;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+#starNameDiv{
+    margin-bottom: 75px;
+}
+.divOffSet{
+    margin-left: 15px;
+}
+#slider {
+    -webkit-appearance: none;
+    position: relative;
+    width: 50px;
+    height: 30px;
+    border-radius: 25px;
+    background-color: #ccc;
+    transition: background .3s;
+    outline: none;
+    cursor: pointer;
+}
+#slider::after{
+    content: '';
+    position: absolute;
+    top:50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 1.25rem;
+    width: 1.25rem;
+    background-color: white;
+    transition: left .3s;
+}
+#slider:checked{
+    background-color: black;
+}
+#slider:checked::after{
+    left:70%;
+}
+.dark-mode{
+    background-color: black;
+    color: white;
+}
+.light-mode{
+    background-color: white;
+    color: black;
+}
