@@ -20,6 +20,11 @@ function authenticate($user, $passwd) {
 
 }
 
+function createUser($user, $passwd) {
+    $dbh = connectDB();
+    $statement = $dbh->prepare("INSERT into t_users VALUES ( :username, sha2(:passwd, 256) )");
+}
+
 function printTopBanner() {
     echo 
     '<div> 
