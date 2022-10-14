@@ -1,8 +1,8 @@
-a:visited{
+#a-style:visited{
     text-decoration: none;
     color: black;
 }
-a{
+#a-style{
     text-decoration: none;
 }
 th#Icon{
