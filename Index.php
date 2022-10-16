@@ -50,7 +50,7 @@
             <script>
                 function darkmode(){
                     var element = document.body;
-                    if(element.className == "light-mode"){
+                    if(document.getElementById('slider').checked){
                         element.className = "dark-mode";
                     }
                     else{
