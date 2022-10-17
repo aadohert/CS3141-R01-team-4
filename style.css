@@ -1,13 +1,21 @@
-body{
+.dark-mode{
+    background-color: black;
+    color: white !important;
+}
+.light-mode{
     background-color: white;
+    color: black !important;
+}
+.a-style:visited{
+    text-decoration: none;
+}
+.a-style{
+    text-decoration: none;
     color:black;
 }
-#a-style:visited{
+.a-style-dark{
     text-decoration: none;
-    color: black;
-}
-#a-style{
-    text-decoration: none;
+    color: white;
 }
 th#Icon{
     text-align: left;
@@ -52,12 +60,4 @@ th.navbar-right-align{
 }
 #slider:checked::after{
     left:70%;
-}
-.dark-mode{
-    background-color: black;
-    color: white;
-}
-.light-mode{
-    background-color: white;
-    color: black;
 }

@@ -1,5 +1,6 @@
 <html>
 <?php
+//used to connect to the database, needed to run any mysql queries 
 function connectDB() {
     $config = parse_ini_file("Starfinder.ini");
     $dbh = new PDO($config['dsn'], $config['username'], $config['password']);
@@ -7,6 +8,7 @@ function connectDB() {
     return $dbh;
 }
 
+//authenticates a user log in, returns 1 if the username and password match, 0 otherwise
 function authenticate($user, $passwd) {
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT count(*) FROM t_users "
@@ -20,6 +22,7 @@ function authenticate($user, $passwd) {
 
 }
 
+//creates a new account given a username and password, throws an error if the username is taken 
 function createUser($user, $passwd) {
     try {
         $dbh = connectDB();
@@ -35,6 +38,7 @@ function createUser($user, $passwd) {
     }
 }
 
+//prints the navbar on every page 
 function printTopBanner() {
     echo 
     '<div> 
@@ -44,11 +48,11 @@ function printTopBanner() {
             <col style="width: 5%">
             <col style="width: 10%">
             <tr> 
-                <th id="Icon"><h1><a href="/Index.php" style="margin-left: 15px;" id="a-style">Star Finder</a></h1></th>
+                <th id="Icon"><h1><a href="/Index.php" style="margin-left: 15px;" id="ahrefI" class="a-style">Star Finder</a></h1></th>
                 <th class="switch"><form><input type="checkbox" name="sldr" id="slider" onchange="darkmode()"></form></th>';
 
-    if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><h3><a href="/Favorites.php" id="a-style">'.$_SESSION["user"].'\'s Favorites</a></h3></th>';
-    else echo '<th class="navbar-right-align"><h3><a href="/Login.php" id="a-style">Favorites</a></h3></th>';
+    if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><h3><a href="/Favorites.php" id="ahrefF" class="a-style">'.$_SESSION["user"].'\'s Favorites</a></h3></th>';
+    else echo '<th class="navbar-right-align"><h3><a href="/Login.php" id="ahrefF" class="a-style">Favorites</a></h3></th>';
         
              
     if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><button onclick="location.href = \'logout.php\';" style="background-image: url(\'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjrCdY7vbLNb3uuqCixRviazh7zdc0yUSB3Ou2w27iCQRKN6T1ylCGuCs1YXkTOQBTjzM&usqp=CAU\'); color:white; cursor:pointer; width:75px;height:35px;">Log Out</button></th>';
