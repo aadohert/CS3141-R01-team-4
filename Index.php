@@ -23,7 +23,7 @@
 
     </head>
 
-    <body class="light-mode">
+    <body class="light-mode" onload="themeChecker()">
             <?php 
                 printTopBanner();
             ?>
