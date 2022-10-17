@@ -1,5 +1,6 @@
 <html>
 <?php
+//used to connect to the database, needed to run any mysql queries 
 function connectDB() {
     $config = parse_ini_file("Starfinder.ini");
     $dbh = new PDO($config['dsn'], $config['username'], $config['password']);
@@ -7,6 +8,7 @@ function connectDB() {
     return $dbh;
 }
 
+//authenticates a user log in, returns 1 if the username and password match, 0 otherwise
 function authenticate($user, $passwd) {
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT count(*) FROM t_users "
@@ -20,6 +22,7 @@ function authenticate($user, $passwd) {
 
 }
 
+//creates a new account given a username and password, throws an error if the username is taken 
 function createUser($user, $passwd) {
     try {
         $dbh = connectDB();
@@ -35,6 +38,7 @@ function createUser($user, $passwd) {
     }
 }
 
+//prints the navbar on every page 
 function printTopBanner() {
     echo 
     '<div> 
