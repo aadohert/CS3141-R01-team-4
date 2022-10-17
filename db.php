@@ -66,13 +66,15 @@ function printTopBanner() {
 }
 
 //This function determines how many days it has been since January 1st 2000 in order to get the local sidereal day
+//May need to be changed to calculate days differently to account for 1200 UT TBD though
 function daysSince2000($date) {
     if (isset($date)) {
         $dayToCalculate = $date;
     }
     else {
-    $dayToCalculate = strtotime("now");
+        $dayToCalculate = strtotime("now");
     }
+    
     $days = $dayToCalculate - strtotime('01-01-2000');
     $days = $days / 86400;
     return $days;
