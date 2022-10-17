@@ -74,10 +74,12 @@ function daysSince2000($date) {
     return $days;
 }
 
+//This isn't used but might be in the future
 function hoursIntoMinutes($hour) {
     return $hour/60;
 }
 
+//Finds the local sidereal time which is the true time it is in an area. (An actual day is 4 minutes slower than a sidereal day)
 function localSiderealTime() {
     $lst = 100.46 + (0.985647 * daysSince2000(null)) + getLongitude() + (15 * getTimeInHours());
     
@@ -92,14 +94,20 @@ function localSiderealTime() {
     return $lst;
 }
 
+//This gets the longitude of your location
+//For now this is just houghton's longitude
 function getLongitude() {
     return 88.5452;
 }
 
+//This gets the latitude of your location
+//For now this is just houghton's latitude
 function getLatitude() {
     return 47.1150;
 }
 
+//Since php does not allow function overloading, I have two versions of the hour angle formula
+//The hour angle is required for calculating the position of a star in the night sky
 function hourAngleWhenGivenRa($givenRa) {
     $HA = localSiderealTime() - $givenRa;
     if($HA < 0) {
@@ -108,6 +116,8 @@ function hourAngleWhenGivenRa($givenRa) {
     return $HA;
 }
 
+//Since php does not allow function overloading, I have two versions of the hour angle formula
+//The hour angle is required for calculating the position of a star in the night sky
 function hourAngleWhenGivenName($starName) {
     $HA = localSiderealTime() - raWithName($starName);
     if($HA < 0) {
@@ -116,6 +126,7 @@ function hourAngleWhenGivenName($starName) {
     return $HA;
 }
 
+//The altitude is the height in the sky that the star is 
 function altitudeWhenGivenName($starName) {
     $sinDec = sin(decWithName($starName));
     $sinLat = sin(getLatitude());
@@ -126,6 +137,7 @@ function altitudeWhenGivenName($starName) {
     return asin($sinAlt);
 }
 
+//The azimuth is the horizontal line that the star is in the night sky
 function azimuthWhenGivenName($starName) {
     $sinHa = sin(hourAngleWhenGivenName($starName));
     $alt = altitudeWhenGivenName($starName);
@@ -143,6 +155,7 @@ function azimuthWhenGivenName($starName) {
     return $Azi;
 }
 
+//The altitude is the height in the sky that the star is 
 function altitudeWhenGivenCoords($givenRa, $givenDec) {
     $sinDec = sin($givenDec);
     $sinLat = sin(getLatitude());
@@ -153,6 +166,7 @@ function altitudeWhenGivenCoords($givenRa, $givenDec) {
     return asin($sinAlt);
 }
 
+//The azimuth is the horizontal line that the star is in the night sky
 function azimuthWhenGivenCoords($givenRa, $givenDec) {
     $sinHa = sin(hourAngleWhenGivenRa($givenRa));
     $alt = altitudeWhenGivenCoords($givenRa, $givenDec);
@@ -170,6 +184,7 @@ function azimuthWhenGivenCoords($givenRa, $givenDec) {
     return $Azi;
 }
 
+//The ra is one of the star values needed to calculate its position
 function raWithName($starName) {
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT r_ang FROM t_stars "
@@ -181,6 +196,7 @@ function raWithName($starName) {
     return $row[0];
 }
 
+//The dec is one of the star values needed to calculate its position
 function decWithName($starName) {
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT dec_ang FROM t_stars "
@@ -192,14 +208,17 @@ function decWithName($starName) {
     return $row[0];
 }
 
+//The ra is one of the star values needed to calculate its position
 function raWhenGivenRa($ra) {
     return $ra;
 }
 
+//The dec is one of the star values needed to calculate its position
 function decWhenGivenDec($dec) {
     return $dec;
 }
 
+//This is needed to calculate the most accurate local sidereal time
 function getTimeInHours() {
     $hour = gmdate("H");
     $minute = gmdate("i") / 60;

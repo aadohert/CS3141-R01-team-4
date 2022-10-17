@@ -11,7 +11,7 @@
                 $expectedValue = '0';
                  $testDate = strtotime('01-02-2000');
                  $realValue = daysSince2000($testDate);
-                 return assert($expectedValue == $realValue, "shits fucked");
+                 return assert($expectedValue == $realValue);
              }
         ?>
         <?php
