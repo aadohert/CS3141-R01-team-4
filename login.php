@@ -14,7 +14,7 @@
 
     </head>
 
-    <body>
+    <body onload="themeChecker()">
             <?php 
                 printTopBanner();
             ?>
