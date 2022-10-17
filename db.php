@@ -1,5 +1,13 @@
 <html>
 <?php
+/**
+ * File containing all functions 
+ *
+ * @author  TSP team 4 
+ * Julianna Cummings, River Dallas, Avery Doherty, Nicky Franklin, Brendan Fuhrman
+*/
+
+     
 //used to connect to the database, needed to run any mysql queries 
 function connectDB() {
     $config = parse_ini_file("Starfinder.ini");
@@ -51,7 +59,7 @@ function printTopBanner() {
                 <th id="Icon"><h1><a href="/Index.php" style="margin-left: 15px;" id="ahrefI" class="a-style">Star Finder</a></h1></th>
                 <th class="switch"><form><input type="checkbox" name="sldr" id="slider" onchange="darkmode()"></form></th>';
 
-    if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><h3><a href="/Favorites.php" id="ahrefF" class="a-style">'.$_SESSION["user"].'\'s Favorites</a></h3></th>';
+    if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><h3><a href="/favorites.php" id="ahrefF" class="a-style">'.$_SESSION["user"].'\'s Favorites</a></h3></th>';
     else echo '<th class="navbar-right-align"><h3><a href="/Login.php" id="ahrefF" class="a-style">Favorites</a></h3></th>';
         
              
@@ -66,13 +74,15 @@ function printTopBanner() {
 }
 
 //This function determines how many days it has been since January 1st 2000 in order to get the local sidereal day
+//May need to be changed to calculate days differently to account for 1200 UT TBD though
 function daysSince2000($date) {
     if (isset($date)) {
         $dayToCalculate = $date;
     }
     else {
-    $dayToCalculate = strtotime("now");
+        $dayToCalculate = strtotime("now");
     }
+    
     $days = $dayToCalculate - strtotime('01-01-2000');
     $days = $days / 86400;
     return $days;

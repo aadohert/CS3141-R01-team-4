@@ -1,4 +1,11 @@
 <?php
+     /**
+     * the main landing page for the site
+     *
+     * @author  TSP team 4 
+     * Julianna Cummings, River Dallas, Avery Doherty, Nicky Franklin, Brendan Fuhrman
+     */
+    
     session_start();
     require "db.php";
 ?>
