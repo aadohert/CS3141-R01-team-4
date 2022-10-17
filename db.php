@@ -1,5 +1,13 @@
 <html>
 <?php
+/**
+ * File containing all functions 
+ *
+ * @author  TSP team 4 
+ * Julianna Cummings, River Dallas, Avery Doherty, Nicky Franklin, Brendan Fuhrman
+*/
+
+     
 //used to connect to the database, needed to run any mysql queries 
 function connectDB() {
     $config = parse_ini_file("Starfinder.ini");

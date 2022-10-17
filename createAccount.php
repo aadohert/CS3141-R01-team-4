@@ -1,4 +1,11 @@
 <?php
+     /**
+     * account creation page
+     *
+     * @author  TSP team 4 
+     * Julianna Cummings, River Dallas, Avery Doherty, Nicky Franklin, Brendan Fuhrman
+     */
+
     session_start();
     require "db.php";
 ?>
@@ -7,6 +14,11 @@
 
 <?php
     printTopBanner();
+
+    //if the user is logged in, send them back to index page instead
+    if(isset($_SESSION["user"])) header('LOCATION:Index.php');
+
+    //if user has pressed the create button, check passwords match and create account if they do
     if(isset($_POST["create"])) {
         if($_POST["password1"] == $_POST["password2"]) {
             $_SESSION["user"] = createUser($_POST["username"], $_POST["password1"]);

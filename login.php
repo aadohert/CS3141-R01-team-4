@@ -1,4 +1,11 @@
 <?php
+    /**
+     * Login page
+     *
+     * @author  TSP team 4 
+     * Julianna Cummings, River Dallas, Avery Doherty, Nicky Franklin, Brendan Fuhrman
+     */
+
     session_start();
     require "db.php";
 ?>
@@ -17,6 +24,10 @@
     <body>
             <?php 
                 printTopBanner();
+
+                //if user is logged in, send them to index page instead
+                if(isset($_SESSION["user"])) header('LOCATION:Index.php');
+
             ?>
 
             <hr>
