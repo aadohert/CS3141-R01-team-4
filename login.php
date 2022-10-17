@@ -52,7 +52,7 @@
                     }
 
                 ?>
-
+            <script src="jsfunc.js"></script>
     </body>
 
 </html>

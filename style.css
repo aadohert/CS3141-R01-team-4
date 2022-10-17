@@ -56,7 +56,7 @@ th.navbar-right-align{
     transition: left .3s;
 }
 #slider:checked{
-    background-color: black;
+    background-color: darkblue;
 }
 #slider:checked::after{
     left:70%;
