@@ -73,30 +73,10 @@ function printTopBanner() {
 
 }
 
-//This function determines how many days it has been since January 1st 2000 in order to get the local sidereal day
-//May need to be changed to calculate days differently to account for 1200 UT TBD though
-function daysSince2000($date) {
-    if (isset($date)) {
-        $dayToCalculate = $date;
-    }
-    else {
-        $dayToCalculate = strtotime("now");
-    }
-    
-    $days = $dayToCalculate - strtotime('01-01-2000');
-    $days = $days / 86400;
-    return $days;
-}
-
-//This isn't used but might be in the future
-function hoursIntoMinutes($hour) {
-    return $hour/60;
-}
-
 //This gets the longitude of your location
 //For now this is just houghton's longitude
 function getLongitude() {
-    return 88.5452;
+    return -88.5452;
 }
 
 //This gets the latitude of your location
@@ -108,7 +88,7 @@ function getLatitude() {
 //Since php does not allow function overloading, I have two versions of the hour angle formula
 //The hour angle is required for calculating the position of a star in the night sky
 function hourAngleWhenGivenRa($givenRa) {
-    $HA = (lstWhenNotGivenDate() * 15) - $givenRa;
+    $HA = lstWhenNotGivenDate() - $givenRa;
     if($HA < 0) {
         $HA = $HA + 360;
     } 
@@ -118,7 +98,7 @@ function hourAngleWhenGivenRa($givenRa) {
 //Since php does not allow function overloading, I have two versions of the hour angle formula
 //The hour angle is required for calculating the position of a star in the night sky
 function hourAngleWhenGivenName($starName) {
-    $HA = (lstWhenNotGivenDate() * 15) - raWithName($starName);
+    $HA = lstWhenNotGivenDate() - raWithName($starName);
     if($HA < 0) {
         $HA = $HA + 360;
     } 
@@ -156,30 +136,29 @@ function azimuthWhenGivenName($starName) {
 
 //The altitude is the height in the sky that the star is 
 function altitudeWhenGivenCoords($givenRa, $givenDec) {
-    $sinDec = sin($givenDec);
-    $sinLat = sin(getLatitude());
-    $cosDec = cos($givenDec);
-    $cosLat = cos(getLatitude());
-    $cosHa = cos(hourAngleWhenGivenRa($givenRa));
-    $sinAlt = (($sinDec * $sinLat) + ($cosDec * $cosLat * $cosHa));
-    return asin($sinAlt);
+    $givenHa = hourAngleWhenGivenRa($givenRa) * ((pi())/180);
+    $givenRa = $givenRa * ((pi())/180);
+    $givenDec = $givenDec * ((pi())/180);
+    $latitude = getLatitude() * ((pi())/180);
+    $alt = (sin($givenDec) * sin($latitude)) + (cos($givenDec) * cos($latitude) * cos($givenHa));
+    $alt = asin($alt);
+    return $alt;
 }
 
 //The azimuth is the horizontal line that the star is in the night sky
 function azimuthWhenGivenCoords($givenRa, $givenDec) {
-    $sinHa = sin(hourAngleWhenGivenRa($givenRa));
+    $givenHa = hourAngleWhenGivenRa($givenRa) * ((pi())/180);
+    $givenRa = $givenRa * ((pi())/180);
+    $givenDec = $givenDec * ((pi())/180);
+    $sinHa = sin($givenHa);
+    $latitude = getLatitude() * ((pi())/180);
     $alt = altitudeWhenGivenCoords($givenRa, $givenDec);
     if($sinHa < 0) {
         return $alt;
     }
 
-    $sinDec = sin($givenDec);
-    $sinAlt = sin($alt);
-    $sinLat = sin(getLatitude());
-    $cosAlt = cos($alt);
-    $cosLat = cos(getLatitude());
-    $cosAzi = (($sinDec - ($sinAlt * $sinLat)) / ($cosAlt * $cosLat));
-    $Azi = acos($cosAzi);
+    $Azi = (sin($givenDec) - (sin($alt)*sin($latitude)) / (cos($alt)*cos($latitude)));
+    $Azi = acos($Azi);
     return $Azi;
 }
 
@@ -217,91 +196,23 @@ function decWhenGivenDec($dec) {
     return $dec;
 }
 
-//This is needed to calculate the most accurate local sidereal time
-function getTimeInHours() {
-    $hour = gmdate("H");
-    $minute = gmdate("i") / 60;
-    $second = gmdate("s") / 3600;
-    $allTime = $hour + $minute + $second;
-    return $allTime;
-}
-
-//Testing new ways of calculating LST
-class moment {
-    public $year;
-    public $month;
-    public $day;
-    public $hour;
-    public $minute;
-    public $second;
-    public $millisecond;
-
-
-    //Takes a time $date that is formatted like "Y m d h i s"
-    function moment($date) {
-        $this->year = date('Y', strtotime('$date'));
-        $this->month = date('m', strtotime('$date'));
-        $this->day = date('d', strtotime('$date'));
-        $this->hour = date('h', strtotime('$date'));
-        $this->minute = date('i', strtotime('$date'));
-        $this->second = date('s', strtotime('$date'));
-    }
-
-    function JulianDay() {
-        $Y = $this->year;
-        $M = $this->month;
-        $gregorianOffset = 0;
-        if($M == '1' || '01' || 1 || 01 || '2' || '02' || 2 || 02) {
-            $Y--;
-            $M = $M + 12;
-        }
-
-        if($Y > 1583) {
-            $gregorianYear = floor($Y / 100);
-            $gregorianOffset = 2 - $gregorianYear + floor($gregorianYear/4);
-        }
-
-        return floor(365.25 * ($Y + 4716) + floor(30.6001 * ($M + 1)) + 
-        (($this->day + ($this->hour/24) + ($this->minute/1440) + ($this->second/1000))/86400)
-        + $gregorianOffset - 1524.5);
-    }
-}
-
-function lstWhenGivenDate($date) {
-    $moment = new moment;
-    $moment->moment($date);
-    $julianDay = $moment->JulianDay();
-    $T = (($julianDay - 2451545)/36525);
-    $theta0 = 280.46061837 + 360.98564736629 * ($julianDay - 2451545) +
-    (0.000387933 * $T * $T) - ($T * $T * $T / 38710000);
-    $theta0 = $theta0 % 360;
-    if($theta0 < 0) {
-        $theta0 += 360;
-    }
-    $theta0 = $theta0 + getLongitude();
-    if($theta0 > 360) {
-        $theta0 = $theta0 - 360;
-    }
-    return $theta0;
-}
-
 function lstWhenNotGivenDate() {
-    $moment = new moment;
-    $moment->moment(date("Y m d h i s"));
-    $julianDay = $moment->JulianDay();
-    $T = (($julianDay - 2451545)/36525);
-    $theta0 = 280.46061837 + 360.98564736629 * ($julianDay - 2451545) +
-    (0.000387933 * $T * $T) - ($T * $T * $T / 38710000);
-    $theta0 = $theta0 % 360;
-    if($theta0 < 0) {
-        $theta0 += 360;
+    date_default_timezone_set('UTC');
+    $d = strtotime('now') - strtotime('1-1-2000 12:00:00');
+    $long = -88.5254;
+    $UT = (date('H')) + (date('i')/60) + (date('s')/3600);
+    $lst = (0.985647 * ($d/86400)) + (15 * $UT) + 100.46 + $long; 
+    while($lst > 360) {
+        $lst = $lst - 360;
     }
-    $theta0 = $theta0 + getLongitude();
-    if($theta0 > 360) {
-        $theta0 = $theta0 - 360;
+    while($lst < 0) {
+        $lst = $lst + 360;
     }
-    return $theta0;
+    return $lst;
 }
+
+
+
 
 ?>
 </html> 
