@@ -93,21 +93,6 @@ function hoursIntoMinutes($hour) {
     return $hour/60;
 }
 
-//Finds the local sidereal time which is the true time it is in an area. (An actual day is 4 minutes slower than a sidereal day)
-function localSiderealTime() {
-    $lst = 100.46 + (0.985647 * daysSince2000(null)) + getLongitude() + (15 * getTimeInHours());
-    
-    while($lst > 360) {
-        $lst = $lst - 360;
-    }
-
-    while($lst < 360) {
-        $lst = $lst + 360;
-    }
-
-    return $lst;
-}
-
 //This gets the longitude of your location
 //For now this is just houghton's longitude
 function getLongitude() {
@@ -123,7 +108,7 @@ function getLatitude() {
 //Since php does not allow function overloading, I have two versions of the hour angle formula
 //The hour angle is required for calculating the position of a star in the night sky
 function hourAngleWhenGivenRa($givenRa) {
-    $HA = localSiderealTime() - $givenRa;
+    $HA = (lstWhenNotGivenDate() * 15) - $givenRa;
     if($HA < 0) {
         $HA = $HA + 360;
     } 
@@ -133,7 +118,7 @@ function hourAngleWhenGivenRa($givenRa) {
 //Since php does not allow function overloading, I have two versions of the hour angle formula
 //The hour angle is required for calculating the position of a star in the night sky
 function hourAngleWhenGivenName($starName) {
-    $HA = localSiderealTime() - raWithName($starName);
+    $HA = (lstWhenNotGivenDate() * 15) - raWithName($starName);
     if($HA < 0) {
         $HA = $HA + 360;
     } 
@@ -239,6 +224,83 @@ function getTimeInHours() {
     $second = gmdate("s") / 3600;
     $allTime = $hour + $minute + $second;
     return $allTime;
+}
+
+//Testing new ways of calculating LST
+class moment {
+    public $year;
+    public $month;
+    public $day;
+    public $hour;
+    public $minute;
+    public $second;
+    public $millisecond;
+
+
+    //Takes a time $date that is formatted like "Y m d h i s"
+    function moment($date) {
+        $this->year = date('Y', strtotime('$date'));
+        $this->month = date('m', strtotime('$date'));
+        $this->day = date('d', strtotime('$date'));
+        $this->hour = date('h', strtotime('$date'));
+        $this->minute = date('i', strtotime('$date'));
+        $this->second = date('s', strtotime('$date'));
+    }
+
+    function JulianDay() {
+        $Y = $this->year;
+        $M = $this->month;
+        $gregorianOffset = 0;
+        if($M == '1' || '01' || 1 || 01 || '2' || '02' || 2 || 02) {
+            $Y--;
+            $M = $M + 12;
+        }
+
+        if($Y > 1583) {
+            $gregorianYear = floor($Y / 100);
+            $gregorianOffset = 2 - $gregorianYear + floor($gregorianYear/4);
+        }
+
+        return floor(365.25 * ($Y + 4716) + floor(30.6001 * ($M + 1)) + 
+        (($this->day + ($this->hour/24) + ($this->minute/1440) + ($this->second/1000))/86400)
+        + $gregorianOffset - 1524.5);
+    }
+}
+
+function lstWhenGivenDate($date) {
+    $moment = new moment;
+    $moment->moment($date);
+    $julianDay = $moment->JulianDay();
+    $T = (($julianDay - 2451545)/36525);
+    $theta0 = 280.46061837 + 360.98564736629 * ($julianDay - 2451545) +
+    (0.000387933 * $T * $T) - ($T * $T * $T / 38710000);
+    $theta0 = $theta0 % 360;
+    if($theta0 < 0) {
+        $theta0 += 360;
+    }
+    $theta0 = $theta0 + getLongitude();
+    if($theta0 > 360) {
+        $theta0 = $theta0 - 360;
+    }
+    return $theta0;
+}
+
+function lstWhenNotGivenDate() {
+    $moment = new moment;
+    $moment->moment(date("Y m d h i s"));
+    $julianDay = $moment->JulianDay();
+    $T = (($julianDay - 2451545)/36525);
+    $theta0 = 280.46061837 + 360.98564736629 * ($julianDay - 2451545) +
+    (0.000387933 * $T * $T) - ($T * $T * $T / 38710000);
+    $theta0 = $theta0 % 360;
+    if($theta0 < 0) {
+        $theta0 += 360;
+    }
+    $theta0 = $theta0 + getLongitude();
+    if($theta0 > 360) {
+        $theta0 = $theta0 - 360;
+    }
+    return $theta0;
 }
 
 ?>

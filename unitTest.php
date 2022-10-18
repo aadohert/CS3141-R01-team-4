@@ -70,8 +70,13 @@
                  $realValue = daysSince2000($testDate);
                  return assert($expectedValue != $realValue);
              }
+
+             function testLSTJan12000() {
+               
+             }
         ?>
         <?php
+            $testDate = date("Y m d h i s");
             echo "Test 1:". testjan12000();
             echo "<br>". "Test 2:". testjan11998False();
             echo "<br>". "Test 3:". testjan11998True();
@@ -81,6 +86,11 @@
             echo "<br>". "Test 7:". testoct282001False();
             echo "<br>". "Test 8:". testapr42022True();
             echo "<br>". "Test 9:". testapr42022False();
+            echo "<br>". "test 10: ". lstWhenGivenDate($testDate);
+            echo "<br>". "test 10.5: ". lstWhenNotGivenDate();
+            echo "<br>". "Test 11: ". hourAngleWhenGivenRa(88.79);
+            echo "<br>". "Test 12: ". altitudeWhenGivenCoords(88.79, 111.11);
+            echo "<br>". "Test 13: ". azimuthWhenGivenCoords(88.79, 111.11);
         ?>
     </body>
 </html>
