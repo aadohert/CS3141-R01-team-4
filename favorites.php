@@ -24,11 +24,11 @@
 
     </head>
 
-    <body class="light-mode">
+    <body onload="themeChecker()">
             <?php 
                 printTopBanner();
             ?>
-
+        <hr>
 
         <script src="jsfunc.js"></script>
     </body>
