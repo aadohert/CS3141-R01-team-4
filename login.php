@@ -28,9 +28,24 @@
                 //if user is logged in, send them to index page instead
                 if(isset($_SESSION["user"])) header('LOCATION:Index.php');
 
+
+
             ?>
 
             <hr>
+
+                <?php 
+                    if(isset($_POST["login"])) {
+                        $auth = authenticate($_POST["username"], $_POST["password"]);
+                        if($auth == 1) {
+                            $_SESSION["user"]=$_POST["username"];
+                            header("LOCATION:Index.php");
+                            }  
+                        else {
+                            echo '<p style="color:red"> incorrect username and password</p>' ; 
+                        }
+                    }
+                ?>
 
                 <form method="post" action="login.php">
 
@@ -49,20 +64,7 @@
                 No account? <a href="/createAccount.php">Click here to create one!<a>
                 </p>    
 
-                <?php
-                    if(isset($_POST["login"])) {
 
-                        $auth = authenticate($_POST["username"], $_POST["password"]);
-                        if($auth == 1) {
-                            $_SESSION["user"]=$_POST["username"];
-                            header("LOCATION:Index.php");
-                        }  
-                        else {
-                            echo '<p style="color:red"> incorrect username and password</p>' ; 
-                        }
-                    }
-
-                ?>
             <script src="jsfunc.js"></script>
     </body>
 

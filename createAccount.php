@@ -29,11 +29,15 @@
             //if the user is logged in, send them back to index page instead
             if(isset($_SESSION["user"])) header('LOCATION:Index.php');
 
-            //if user has pressed the create button, check passwords match and create account if they do
+            //if user has pressed the create button, check all inputs are valid before creating account
             if(isset($_POST["create"])) {
                 //checks all boxes are filled
                 if (empty($_POST["username"]) || empty($_POST["password1"]) || empty($_POST["password2"])) {
                     echo '<p style="color:red">please fill in all boxes</p>';
+                }
+                //check username is short enough 
+                else if (strlen($_POST["username"]) > 50) {
+                    echo '<p style="color:red">username is too long, please pick a shorter one</p>';
                 }
                 //matches passwords, creates account if they do
                 else if($_POST["password1"] == $_POST["password2"]) {
