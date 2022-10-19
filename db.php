@@ -76,13 +76,13 @@ function printTopBanner() {
 //This gets the longitude of your location
 //For now this is just houghton's longitude
 function getLongitude() {
-    return -88.5452;
+    return -88.5694;
 }
 
 //This gets the latitude of your location
 //For now this is just houghton's latitude
 function getLatitude() {
-    return 47.1150;
+    return 47.1211;
 }
 
 //Since php does not allow function overloading, I have two versions of the hour angle formula
@@ -136,12 +136,13 @@ function azimuthWhenGivenName($starName) {
 
 //The altitude is the height in the sky that the star is 
 function altitudeWhenGivenCoords($givenRa, $givenDec) {
-    $givenHa = hourAngleWhenGivenRa($givenRa) * ((pi())/180);
+    $givenHa = (hourAngleWhenGivenRa($givenRa) * ((pi())/180));
     $givenRa = $givenRa * ((pi())/180);
     $givenDec = $givenDec * ((pi())/180);
     $latitude = getLatitude() * ((pi())/180);
     $alt = (sin($givenDec) * sin($latitude)) + (cos($givenDec) * cos($latitude) * cos($givenHa));
     $alt = asin($alt);
+    
     return $alt;
 }
 
@@ -157,7 +158,7 @@ function azimuthWhenGivenCoords($givenRa, $givenDec) {
         return $alt;
     }
 
-    $Azi = (sin($givenDec) - (sin($alt)*sin($latitude)) / (cos($alt)*cos($latitude)));
+    $Azi = ((sin($givenDec) - (sin($alt)*sin($latitude)) / (cos($alt)*cos($latitude))));
     $Azi = acos($Azi);
     return $Azi;
 }
