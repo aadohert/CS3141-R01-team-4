@@ -31,12 +31,22 @@
 
             //if user has pressed the create button, check passwords match and create account if they do
             if(isset($_POST["create"])) {
-                if($_POST["password1"] == $_POST["password2"]) {
+                //checks all boxes are filled
+                if (empty($_POST["username"]) || empty($_POST["password1"]) || empty($_POST["password2"])) {
+                    echo '<p style="color:red">please fill in all boxes</p>';
+                }
+                //matches passwords, creates account if they do
+                else if($_POST["password1"] == $_POST["password2"]) {
+                    //create user will throw error if the username is already in use
                     $_SESSION["user"] = createUser($_POST["username"], $_POST["password1"]);
                     if(isset($_SESSION["user"])) header('LOCATION:Index.php');
                 }
+                //error if passwords don't match
                 else echo '<p style="color:red">passwords do not match</p>';
+            
+                
             }
+            
         ?>
 
         <form method="post" action="createAccount.php">
