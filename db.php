@@ -148,19 +148,21 @@ function altitudeWhenGivenCoords($givenRa, $givenDec) {
 
 //The azimuth is the horizontal line that the star is in the night sky
 function azimuthWhenGivenCoords($givenRa, $givenDec) {
-    $givenHa = hourAngleWhenGivenRa($givenRa) * ((pi())/180);
+    $givenHa = (hourAngleWhenGivenRa($givenRa) * ((pi())/180));
     $givenRa = $givenRa * ((pi())/180);
     $givenDec = $givenDec * ((pi())/180);
-    $sinHa = sin($givenHa);
     $latitude = getLatitude() * ((pi())/180);
-    $alt = altitudeWhenGivenCoords($givenRa, $givenDec);
-    if($sinHa < 0) {
-        return $alt;
+    $alt = (sin($givenDec) * sin($latitude)) + (cos($givenDec) * cos($latitude) * cos($givenHa));
+    $alt = asin($alt);
+    $azi = (sin($givenDec) - (sin($alt) * sin($latitude))) / ((cos($alt) * cos($latitude)));
+    
+    if($givenHa > 0) {
+        return (2*pi()) - acos($azi);
     }
 
-    $Azi = ((sin($givenDec) - (sin($alt)*sin($latitude)) / (cos($alt)*cos($latitude))));
-    $Azi = acos($Azi);
-    return $Azi;
+    else {
+        return acos($azi);
+    }
 }
 
 //The ra is one of the star values needed to calculate its position
