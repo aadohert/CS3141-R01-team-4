@@ -46,6 +46,21 @@ function createUser($user, $passwd) {
     }
 }
 
+//updates the password of a user
+function updatePassword($user, $passwd) {
+    
+        $dbh = connectDB();
+        $statement = $dbh->prepare("UPDATE t_users VALUES SET newpassword = sha2(:passwd, 256), WHERE username = :username");
+        $statement->bindParam(":username", $user);
+        $statement->bindParam(":passwd", $passwd);
+        $statement->execute();
+
+        return $user;
+    
+
+}
+
+
 //prints the navbar on every page 
 function printTopBanner() {
     echo 

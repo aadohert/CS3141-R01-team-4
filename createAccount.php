@@ -42,6 +42,10 @@
                 //matches passwords, creates account if they do
                 else if($_POST["password1"] == $_POST["password2"]) {
                     //create user will throw error if the username is already in use
+                    //check password is at least 8 characters
+                    if (strlen($_POST["password1"]) < 8) {
+                        echo '<p style="color:red">password is too short, please pick a longer one</p>';
+                        }
                     $_SESSION["user"] = createUser($_POST["username"], $_POST["password1"]);
                     if(isset($_SESSION["user"])) header('LOCATION:Index.php');
                 }
