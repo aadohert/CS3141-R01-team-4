@@ -8,6 +8,7 @@
 
     session_start();
     require "db.php";
+    if(!isset($_SESSION["user"])) header('LOCATION:Index.php');
 ?>
 <!DOCTYPE html>
 <html lang="eng">    
@@ -26,12 +27,14 @@
             printTopBanner();
             ?><hr><?php
             
-                    if(isset($_POST["Change Password"])) {
+                    if(isset($_POST["changePassword"])) {
                         $auth = authenticate($_POST["username"], $_POST["password"]);
                         if($auth == 1) {
-                            $_SESSION["user"] = updatePassword($_POST["username"], $_POST["password2"]);
-                            $_SESSION["user"]=$_POST["username"];
-                            header("LOCATION:Index.php");
+                            //$_SESSION["user"] = 
+                            updatePassword($_POST["username"], $_POST["password2"]);
+                            //$_SESSION["user"]=$_POST["username"];
+                            //header("LOCATION:Index.php");
+                            echo '<p style="color:green">password has been updated</p>' ;
                             }  
                         else {
                             echo '<p style="color:red"> incorrect password for account</p>' ; 
@@ -56,7 +59,7 @@
         <br> <br>
 
 
-<input type="submit" name="change password" value="change password">
+<input type="submit" name="changePassword" value="changePassword">
 
 </form>
 <p> 
