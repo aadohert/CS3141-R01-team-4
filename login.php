@@ -59,10 +59,7 @@
 
                 <input type="submit" name="login" value="login">
 
-                </form>
-                <p> 
-                <a href="/changePassword.php">Change Password<a>
-                    
+            
                 </p>   
                 No account? <a href="/createAccount.php">Click here to create one!<a>
                 

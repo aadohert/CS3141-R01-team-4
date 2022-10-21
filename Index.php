@@ -20,13 +20,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
 
-
     </head>
 
     <body class="light-mode" onload="themeChecker()">
             <?php 
                 printTopBanner();
             ?>
+            </div></div></form>
+            </div></div> <a href="/changePassword.php">Change Password<a>
             <hr>
             <!--Div for inputting the star name-->
             <div id="starNameDiv" class="divOffSet">
