@@ -16,17 +16,17 @@ function connectDB() {
     return $dbh;
 }
 
-//authenticates a user log in, returns 1 if the username and password match, 0 otherwise
+//authenticates a user log in, returns an arrary of int (1 if login is currect, 0 if it is not) and username
 function authenticate($user, $passwd) {
     $dbh = connectDB();
-    $statement = $dbh->prepare("SELECT count(*) FROM t_users "
+    $statement = $dbh->prepare("SELECT count(*), username FROM t_users "
     ."where username = :username and passwd = sha2(:passwd,256) ");
     $statement->bindParam(":username", $user);
     $statement->bindParam(":passwd", $passwd);
     $result = $statement->execute();
     $row=$statement->fetch();
     $dbh=null;
-    return $row[0];
+    return $row;
 
 }
 

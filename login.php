@@ -37,8 +37,8 @@
                 <?php 
                     if(isset($_POST["login"])) {
                         $auth = authenticate($_POST["username"], $_POST["password"]);
-                        if($auth == 1) {
-                            $_SESSION["user"]=$_POST["username"];
+                        if($auth[0] == 1) {
+                            $_SESSION["user"]=$auth[1];
                             header("LOCATION:Index.php");
                             }  
                         else {
