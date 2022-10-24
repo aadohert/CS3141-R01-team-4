@@ -60,6 +60,26 @@ function updatePassword($user, $passwd) {
 
 }
 
+//returns data about the named star, or 0 if it's not in the database
+function queryStarByName($name) {
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT * FROM t_stars "
+    ."where name = :name");
+    $statement->bindParam(":name", $name);
+    $result = $statement->execute();
+    $row=$statement->fetch();
+    $dbh=null;
+
+    if(count($row) == 0) {
+        return 0;
+    }
+    else {
+        return $row;
+    }
+
+
+}
+
 
 //prints the navbar on every page 
 function printTopBanner() {

@@ -46,10 +46,10 @@
                         <!-- RA and DEC form -->
                             <form action = "Index.php">
                             <div class="form-group">
-                                <input class="form-control" type="text" id="starName" name="starName" placeholder="RA" style="width: 150px">
+                                <input class="form-control" type="text" id="RA" name="RA" placeholder="RA" style="width: 150px">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" id="starName" name="starName" placeholder="Dec" style="width: 150px">
+                                <input class="form-control" type="text" id="DEC" name="DEC" placeholder="DEC" style="width: 150px">
                             </div>
                             <div class="form-group">
                                 <input class="form-control" type="submit" value="Calculate" name="Calculate"> 
