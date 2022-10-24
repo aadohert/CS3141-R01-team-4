@@ -29,32 +29,52 @@
             </div></div></form>
             </div></div> <a href="/changePassword.php">Change Password<a>
             <hr>
-            <!--Div for inputting the star name-->
-            <div id="starNameDiv" class="divOffSet">
-                <form style="margin-top:20px;">
-                    <div class="form-group">
-                        <input class="form-control" type="text" id="starName" name="starName" placeholder="Star Name" style="width: 150px">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="submit" value="Calculate"> 
-                    </div>  
-                </form>
+            
+            <table>
+                <tr>
+                    <td>
+                        <!-- star name form -->
+                            <form action = "Index.php">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" id="starName" name="starName" placeholder="Star Name" style="width: 150px">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="submit" value="Calculate" name="Calculate"> 
+                                </div>
+                            </form>
+                            <br>
+                        <!-- RA and DEC form -->
+                            <form action = "Index.php">
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="starName" name="starName" placeholder="RA" style="width: 150px">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="starName" name="starName" placeholder="Dec" style="width: 150px">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="submit" value="Calculate" name="Calculate"> 
+                            </div>  
+                            </form>
 
-            </div>
-            <!--Div for inputting the RA and Dec-->
-            <div class="divOffSet">
-               <form>
-                    <div class="form-group">
-                        <input class="form-control" type="text" id="starName" name="starName" placeholder="RA" style="width: 150px">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" id="starName" name="starName" placeholder="Dec" style="width: 150px">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="submit" value="Calculate"> 
-                    </div>  
-                </form>
-            </div>
+                    </td>
+                    <td>
+                        <?php 
+                            if(!isset($_GET["Calculate"])) {
+                                echo "<h1> Welcome to the Starfinder site!</h1>
+                                <p> Put a star's name or its right ascension and declination to find where it is relative to Houghton, Michigan </p>";
+                            }
+                            else {
+                                //call query, return info 
+                            }
+                        ?>
+
+                    </td>
+                </tr>
+
+                </div>
+
+            </table>
+
             <script src="jsfunc.js"></script>
     </body>
 </html>
