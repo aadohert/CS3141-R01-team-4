@@ -122,8 +122,11 @@ function getLatitude() {
 
 //Since php does not allow function overloading, I have two versions of the hour angle formula
 //The hour angle is required for calculating the position of a star in the night sky
-function hourAngleWhenGivenRa($givenRa) {
-    $HA = lstWhenNotGivenDate() - $givenRa;
+function hourAngleWhenGivenRa($givenRa, $date) {
+    if(!isset($date)) {
+        $date = 'now';
+    }
+    $HA = lstWhenNotGivenDate($date) - $givenRa;
     if($HA < 0) {
         $HA = $HA + 360;
     } 
@@ -132,8 +135,11 @@ function hourAngleWhenGivenRa($givenRa) {
 
 //Since php does not allow function overloading, I have two versions of the hour angle formula
 //The hour angle is required for calculating the position of a star in the night sky
-function hourAngleWhenGivenName($starName) {
-    $HA = lstWhenNotGivenDate() - raWithName($starName);
+function hourAngleWhenGivenName($starName, $date) {
+    if(!isset($date)) {
+        $date = 'now';
+    }
+    $HA = lstWhenGivenDate($date) - raWithName($starName);
     if($HA < 0) {
         $HA = $HA + 360;
     } 
@@ -141,37 +147,52 @@ function hourAngleWhenGivenName($starName) {
 }
 
 //The altitude is the height in the sky that the star is 
-function altitudeWhenGivenName($starName) {
-    $sinDec = sin(decWithName($starName));
-    $sinLat = sin(getLatitude());
-    $cosDec = cos(decWithName($starName));
-    $cosLat = cos(getLatitude());
-    $cosHa = cos(hourAngleWhenGivenName($starName));
-    $sinAlt = (($sinDec * $sinLat) + ($cosDec * $cosLat * $cosHa));
-    return asin($sinAlt);
+function altitudeWhenGivenName($starName, $date) {
+    if(!isset($date)) {
+        $date = 'now';
+    }
+    $ra = raWithName($starName);
+    $dec = decWithName($starName);
+    $givenHa = (hourAngleWhenGivenRa($ra, $date) * ((pi())/180));
+    $ra = $ra * ((pi())/180);
+    $dec = $dec * ((pi())/180);
+    $latitude = getLatitude() * ((pi())/180);
+    $alt = (sin($dec) * sin($latitude)) + (cos($dec) * cos($latitude) * cos($givenHa));
+    $alt = asin($alt);
+    
+    return $alt;
 }
 
 //The azimuth is the horizontal line that the star is in the night sky
-function azimuthWhenGivenName($starName) {
-    $sinHa = sin(hourAngleWhenGivenName($starName));
-    $alt = altitudeWhenGivenName($starName);
-    if($sinHa < 0) {
-        return $alt;
+function azimuthWhenGivenName($starName, $date) {
+    if(!isset($date)) {
+        $date = 'now';
+    }
+    $givenRa = raWithName($starName);
+    $givenDec = decWithName($starName);
+    $givenHa = (hourAngleWhenGivenRa($givenRa, $date) * ((pi())/180));
+    $givenRa = $givenRa * ((pi())/180);
+    $givenDec = $givenDec * ((pi())/180);
+    $latitude = getLatitude() * ((pi())/180);
+    $alt = (sin($givenDec) * sin($latitude)) + (cos($givenDec) * cos($latitude) * cos($givenHa));
+    $alt = asin($alt);
+    $azi = (sin($givenDec) - (sin($alt) * sin($latitude))) / ((cos($alt) * cos($latitude)));
+    
+    if($givenHa > 0) {
+        return (2*pi()) - acos($azi);
     }
 
-    $sinDec = sin(decWithName($starName));
-    $sinAlt = sin($alt);
-    $sinLat = sin(getLatitude());
-    $cosAlt = cos($alt);
-    $cosLat = cos(getLatitude());
-    $cosAzi = (($sinDec - ($sinAlt * $sinLat)) / ($cosAlt * $cosLat));
-    $Azi = acos($cosAzi);
-    return $Azi;
+    else {
+        return acos($azi);
+    }
 }
 
 //The altitude is the height in the sky that the star is 
-function altitudeWhenGivenCoords($givenRa, $givenDec) {
-    $givenHa = (hourAngleWhenGivenRa($givenRa) * ((pi())/180));
+function altitudeWhenGivenCoords($givenRa, $givenDec, $date) {
+    if(!isset($date)) {
+        $date = 'now';
+    }
+    $givenHa = (hourAngleWhenGivenRa($givenRa, $date) * ((pi())/180));
     $givenRa = $givenRa * ((pi())/180);
     $givenDec = $givenDec * ((pi())/180);
     $latitude = getLatitude() * ((pi())/180);
@@ -182,8 +203,11 @@ function altitudeWhenGivenCoords($givenRa, $givenDec) {
 }
 
 //The azimuth is the horizontal line that the star is in the night sky
-function azimuthWhenGivenCoords($givenRa, $givenDec) {
-    $givenHa = (hourAngleWhenGivenRa($givenRa) * ((pi())/180));
+function azimuthWhenGivenCoords($givenRa, $givenDec, $date) {
+    if(!isset($date)) {
+        $date = 'now';
+    }
+    $givenHa = (hourAngleWhenGivenRa($givenRa, $date) * ((pi())/180));
     $givenRa = $givenRa * ((pi())/180);
     $givenDec = $givenDec * ((pi())/180);
     $latitude = getLatitude() * ((pi())/180);
@@ -249,7 +273,20 @@ function lstWhenNotGivenDate() {
     return $lst;
 }
 
-
+function lstWhenGivenDate($date) {
+    date_default_timezone_set('UTC');
+    $d = strtotime($date) - strtotime('1-1-2000 12:00:00');
+    $long = -88.5254;
+    $UT = (date('H')) + (date('i')/60) + (date('s')/3600);
+    $lst = (0.985647 * ($d/86400)) + (15 * $UT) + 100.46 + $long; 
+    while($lst > 360) {
+        $lst = $lst - 360;
+    }
+    while($lst < 0) {
+        $lst = $lst + 360;
+    }
+    return $lst;
+}
 
 
 ?>
