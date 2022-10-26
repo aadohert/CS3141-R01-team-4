@@ -64,9 +64,17 @@
                                 <p> Put a star's name or its right ascension and declination to find where it is relative to Houghton, Michigan </p>";
                             }
                             else {
-                                if(!empty($_GET["starName"]) || (!empty($_GET["RA"]) && !empty($_GET["DEC"]))) {
-                                    //call query 
+                                if(!empty($_GET["starName"])) {
+                                    
+                                    $star = queryStarByName($_GET["starName"]);
+                                    echo '<h1>Star Name: '.$star[0].'</h1>';
+                                    echo '<br><p>Constellation: '.$star[3].' </p>';
+                                    echo '<p>About: '.$star[4].'</p>';
+                                    
 
+                                }
+                                else if (!empty($_GET["RA"]) && !empty($_GET["DEC"])) {
+                                    echo 'RA and DEC query';
                                 }
                                 else echo '<p style="color:red">To find a star please insert a name or right ascension and declination</p>';
                             }

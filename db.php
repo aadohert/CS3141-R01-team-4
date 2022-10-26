@@ -38,11 +38,14 @@ function createUser($user, $passwd) {
         $statement->bindParam(":username", $user);
         $statement->bindParam(":passwd", $passwd);
         $statement->execute();
+        $dbh = null;
 
         return $user;
     }
     catch (Exception $e) {
         echo '<p style="color:red">the username "'.$user.'" is already taken, please try another one</p>';
+        $dbh = null;
+        
     }
 }
 
@@ -50,10 +53,12 @@ function createUser($user, $passwd) {
 function updatePassword($user, $passwd) {
     
         $dbh = connectDB();
-        $statement = $dbh->prepare("UPDATE t_users VALUES SET passwd = sha2(:passwd, 256), WHERE username = :username");
+        $statement = $dbh->prepare("UPDATE t_users SET passwd = 'passwordpassword', WHERE username = :username");
         $statement->bindParam(":username", $user);
         $statement->bindParam(":passwd", $passwd);
         $statement->execute();
+        $dbh = null;
+
 
         return $user;
     
