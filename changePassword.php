@@ -29,8 +29,11 @@
             
                     if(isset($_POST["changePassword"])) {
                         $auth = authenticate($_POST["username"], $_POST["password"]);
-                        if($auth == 1) {
+                        if($auth[0] == 1) {
                             //$_SESSION["user"] = 
+                            if (strlen($_POST["password2"]) < 8) {
+                                echo '<p style="color:red">password must be at least 8 characters</p>';
+                            }
                             updatePassword($_POST["username"], $_POST["password2"]);
                             //$_SESSION["user"]=$_POST["username"];
                             //header("LOCATION:Index.php");
@@ -41,7 +44,7 @@
                         }
                     }
                 ?>
-            
+             
         
 
             <form method="post" action="changepassword.php">
