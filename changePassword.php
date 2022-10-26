@@ -34,10 +34,12 @@
                             if (strlen($_POST["password2"]) < 8) {
                                 echo '<p style="color:red">password must be at least 8 characters</p>';
                             }
-                            updatePassword($_POST["username"], $_POST["password2"]);
+                            else{
+                                updatePassword($_POST["username"], $_POST["password2"]);
                             //$_SESSION["user"]=$_POST["username"];
                             //header("LOCATION:Index.php");
                             echo '<p style="color:green">password has been updated</p>' ;
+                            }
                             }  
                         else {
                             echo '<p style="color:red"> incorrect password for account</p>' ; 
