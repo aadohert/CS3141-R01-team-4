@@ -70,8 +70,12 @@
                                     echo '<h1>Star Name: '.$star[0].'</h1>';
                                     echo '<br><p>Constellation: '.$star[3].' </p>';
                                     echo '<p>About: '.$star[4].'</p>';
-                                    
 
+                                    $starAlt = round(radiansToDegrees(altitudeWhenGivenName($star[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                                    $starAz = round(radiansToDegrees(azimuthWhenGivenName($star[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+
+                                    echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
+                                    
                                 }
                                 else if (!empty($_GET["RA"]) && !empty($_GET["DEC"])) {
                                     echo 'RA and DEC query';

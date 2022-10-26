@@ -293,6 +293,12 @@ function lstWhenGivenDate($date) {
     return $lst;
 }
 
+//converts a value in radians to degrees
+function radiansToDegrees ($radians) {
+    $degrees = $radians * (180/pi());
+    return $degrees;
+}
+
 
 ?>
 </html> 
