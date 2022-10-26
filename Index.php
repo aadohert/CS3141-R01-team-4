@@ -59,26 +59,36 @@
                     </td>
                     <td>
                         <?php 
+                            //default if button hasn't been hit
                             if(!isset($_GET["Calculate"])) {
                                 echo "<h1> Welcome to the Starfinder site!</h1>
                                 <p> Put a star's name or its right ascension and declination to find where it is relative to Houghton, Michigan </p>";
                             }
+                            //runs if calculate is hit
                             else {
-                                if(!empty($_GET["starName"])) {
+                                //checks user filled in either the starname or both of RA and DEC
+                                if(!empty($_GET["starName"]) || !empty($_GET["RA"]) && !empty($_GET["DEC"])) {
                                     
-                                    $star = queryStarByName($_GET["starName"]);
-                                    echo '<h1>Star Name: '.$star[0].'</h1>';
-                                    echo '<br><p>Constellation: '.$star[3].' </p>';
-                                    echo '<p>About: '.$star[4].'</p>';
+                                    $star = 0;
+                                    //calls starname query or RA and DEC query, depending 
+                                    if(!empty($_GET["starName"])) $star = queryStarByName($_GET["starName"]);
+                                    else $star = queryStarByRAandDEC($_GET["RA"], $_GET["DEC"]);
 
-                                    $starAlt = round(radiansToDegrees(altitudeWhenGivenName($star[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
-                                    $starAz = round(radiansToDegrees(azimuthWhenGivenName($star[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                                    if ($star == 0 ) {
+                                        echo '<p style="color:red">Star does not exist in our database</p>';
+                                    }
+                                    else {
+                                        echo '<h1>Star Name: '.$star[0].'</h1>';
+                                        echo '<br><p>Constellation: '.$star[3].' </p>';
+                                        echo '<p>About: '.$star[4].'</p>';
 
-                                    echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
+                                        $starAlt = round(radiansToDegrees(altitudeWhenGivenName($star[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                                        $starAz = round(radiansToDegrees(azimuthWhenGivenName($star[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                                        
+                                        echo "<p> DEC: ".$star[2]." RA: ".$star[1]." </p>";
+                                        echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
+                                    }
                                     
-                                }
-                                else if (!empty($_GET["RA"]) && !empty($_GET["DEC"])) {
-                                    echo 'RA and DEC query';
                                 }
                                 else echo '<p style="color:red">To find a star please insert a name or right ascension and declination</p>';
                             }

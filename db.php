@@ -75,13 +75,31 @@ function queryStarByName($name) {
     $row=$statement->fetch();
     $dbh=null;
 
-    if(count($row) == 0) {
+    if(is_null($row)) {
         return 0;
     }
     else {
         return $row;
     }
 
+
+}
+
+function queryStarByRAandDEC ($RA, $DEC) {
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT * FROM t_stars WHERE r_ang = :ra AND dec_ang = :dec");
+    $statement->bindParam(":ra", $RA);
+    $statement->bindParam(":dec", $DEC);
+    $result = $statement->execute();
+    $row=$statement->fetch();
+    $dbh=null;
+
+    if(is_null($row)) {
+        return 0;
+    }
+    else {
+        return $row;
+    }
 
 }
 
