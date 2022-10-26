@@ -38,11 +38,14 @@ function createUser($user, $passwd) {
         $statement->bindParam(":username", $user);
         $statement->bindParam(":passwd", $passwd);
         $statement->execute();
+        $dbh = null;
 
         return $user;
     }
     catch (Exception $e) {
         echo '<p style="color:red">the username "'.$user.'" is already taken, please try another one</p>';
+        $dbh = null;
+        
     }
 }
 
@@ -54,6 +57,8 @@ function updatePassword($user, $passwd) {
         $statement->bindParam(":username", $user);
         $statement->bindParam(":passwd", $passwd);
         $statement->execute();
+        $dbh = null;
+
 
         return $user;
     
