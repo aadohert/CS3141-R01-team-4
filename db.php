@@ -53,7 +53,7 @@ function createUser($user, $passwd) {
 function updatePassword($user, $passwd) {
     
         $dbh = connectDB();
-        $statement = $dbh->prepare("UPDATE t_users SET passwd = 'passwordpassword', WHERE username = :username");
+        $statement = $dbh->prepare("UPDATE t_users SET passwd = :passwd, WHERE username = :username");
         $statement->bindParam(":username", $user);
         $statement->bindParam(":passwd", $passwd);
         $statement->execute();
@@ -296,7 +296,7 @@ function lstWhenGivenDate($date) {
 
 //converts a value in radians to degrees
 function radiansToDegrees ($radians) {
-    $degrees = $radians * (180/pi());
+    $degrees = $radians * (180/(pi()));
     return $degrees;
 }
 
