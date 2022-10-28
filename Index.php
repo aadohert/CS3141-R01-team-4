@@ -36,9 +36,9 @@
                 
                 }
             ?>
-            <table VALIGN=TOP >
-                <tr>
-                    <td>
+            <table class="star" >
+                <tr class = "star">
+                    <td class = "star" >
                         <!-- star name form -->
                             <form action = "Index.php">
                                 <div class="form-group">
@@ -63,7 +63,7 @@
                             </form>
 
                     </td>
-                    <td>
+                    <td class = "star">
                         <?php 
                             //default if button hasn't been hit
                             if(!isset($_GET["Calculate"])) {
