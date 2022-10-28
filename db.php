@@ -30,6 +30,31 @@ function authenticate($user, $passwd) {
 
 }
 
+function addFavorite($user, $starName) {
+
+    $dbh = connectDB();
+
+    $statement = $dbh->prepare("SELECT * FROM t_favorites WHERE f_username = :username and f_star = :star");
+    $statement->bindParam(":username", $user);
+    $statement->bindParam(":star", $starName);
+    $result = $statement->execute();
+    $row=$statement->fetch();
+
+    if($row == 0) {
+        $statement = $dbh->prepare("INSERT into t_favorites VALUES (:username , :star)");
+        $statement->bindParam(":username", $user);
+        $statement->bindParam(":star", $starName);
+        $result = $statement->execute();
+ 
+    }
+    //this is a test statement - user should not be able to double favorite a star once more code is implemented 
+    else echo "this star has been favorited already";
+
+    $dbh = null;
+
+
+}
+
 //creates a new account given a username and password, throws an error if the username is taken 
 function createUser($user, $passwd) {
     try {
@@ -75,12 +100,8 @@ function queryStarByName($name) {
     $row=$statement->fetch();
     $dbh=null;
 
-    if(is_null($row)) {
-        return 0;
-    }
-    else {
-        return $row;
-    }
+
+    return $row;
 
 
 }
@@ -94,12 +115,8 @@ function queryStarByRAandDEC ($RA, $DEC) {
     $row=$statement->fetch();
     $dbh=null;
 
-    if(is_null($row)) {
-        return 0;
-    }
-    else {
-        return $row;
-    }
+    return $row;
+
 
 }
 

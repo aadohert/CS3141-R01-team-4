@@ -31,7 +31,9 @@
             <hr>
             <?php 
                 if(isset($_POST["fav"])) {
-                    //add star to favorites
+                    
+                    addFavorite($_SESSION["user"], $_SESSION["star"]);
+                
                 }
             ?>
             <table>
@@ -80,15 +82,16 @@
 
                                     if ($star == 0 ) {
                                         echo '<p style="color:red">Star does not exist in our database</p>';
-
-                                        $starAlt = round(radiansToDegrees(altitudeWhenGivenCoords($_GET["RA"], $_GET["DEC"], 'now')), 2, PHP_ROUND_HALF_DOWN);
-                                        $starAz = round(radiansToDegrees(azimuthWhenGivenCoords($_GET["RA"], $_GET["DEC"], 'now')), 2, PHP_ROUND_HALF_DOWN);
-                                        echo "<p>if the star exists it would be found at these points: </p>";
-                                        echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
+                                        if (!empty($_GET["RA"]) && !empty($_GET["DEC"])) {
+                                            $starAlt = round(radiansToDegrees(altitudeWhenGivenCoords($_GET["RA"], $_GET["DEC"], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                                            $starAz = round(radiansToDegrees(azimuthWhenGivenCoords($_GET["RA"], $_GET["DEC"], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                                            echo "<p>if the star exists it would be found at these points: </p>";
+                                            echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
+                                        }
                                     }
                                     else {
                                         echo '<h1>Star Name: '.$star[0].'</h1>';
-                                        $_SESSION["Star"] = $star[0];
+                                        $_SESSION["star"] = $star[0];
                                         echo '<br><p>Constellation: '.$star[3].' </p>';
                                         echo '<p>About: '.$star[4].'</p>';
 
@@ -100,7 +103,7 @@
                                         echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
                                         
                                         
-                                        echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["Star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
+                                        echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
                                     }
                                     
                                 }
