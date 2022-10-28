@@ -29,7 +29,11 @@
             </div></div></form>
             </div></div> <a href="/changePassword.php">Change Password<a>
             <hr>
-            
+            <?php 
+                if(isset($_POST["fav"])) {
+                    //add star to favorites
+                }
+            ?>
             <table>
                 <tr>
                     <td>
@@ -84,6 +88,7 @@
                                     }
                                     else {
                                         echo '<h1>Star Name: '.$star[0].'</h1>';
+                                        $_SESSION["Star"] = $star[0];
                                         echo '<br><p>Constellation: '.$star[3].' </p>';
                                         echo '<p>About: '.$star[4].'</p>';
 
@@ -93,6 +98,9 @@
                                         //echo "<p> DEC: ".$star[2]." RA: ".$star[1]." </p>";
                                         echo "<p>Star can be found at: </p>";
                                         echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
+                                        
+                                        
+                                        echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["Star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
                                     }
                                     
                                 }
