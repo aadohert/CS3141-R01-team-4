@@ -36,7 +36,7 @@
                 
                 }
             ?>
-            <table>
+            <table VALIGN=TOP >
                 <tr>
                     <td>
                         <!-- star name form -->
@@ -103,7 +103,7 @@
                                         echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
                                         
                                         
-                                        echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
+                                        if (isset($_SESSION["user"])) echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
                                     }
                                     
                                 }
