@@ -35,6 +35,11 @@
                     addFavorite($_SESSION["user"], $_SESSION["star"]);
                 
                 }
+                else if (isset ($_POST["unfav"])) {
+                    
+                    removeFavorite($_SESSION["user"], $_SESSION["star"]);
+
+                }
             ?>
             <table class="star" >
                 <tr class = "star">
@@ -92,18 +97,23 @@
                                     else {
                                         echo '<h1>Star Name: '.$star[0].'</h1>';
                                         $_SESSION["star"] = $star[0];
-                                        echo '<br><p>Constellation: '.$star[3].' </p>';
+                                        if(!is_null($star[3])) echo '<p>Constellation: '.$star[3].' </p>';
                                         echo '<p>About: '.$star[4].'</p>';
 
                                         $starAlt = round(radiansToDegrees(altitudeWhenGivenName($star[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
                                         $starAz = round(radiansToDegrees(azimuthWhenGivenName($star[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
                                         
                                         //echo "<p> DEC: ".$star[2]." RA: ".$star[1]." </p>";
-                                        echo "<p>Star can be found at: </p>";
-                                        echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
+                                        echo "<p>Star can be found at <br>";
+                                        echo 'Altitude: '.$starAlt.' Azimuth: '.$starAz.'</p>';
                                         
                                         
-                                        if (isset($_SESSION["user"])) echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
+                                        if (isset($_SESSION["user"])) {
+                                            $favorited = hasBeenFavorited($_SESSION["user"], $_SESSION["star"]);
+
+                                            if(0 == $favorited) echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
+                                            else echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
+                                        }
                                     }
                                     
                                 }

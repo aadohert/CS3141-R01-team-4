@@ -30,17 +30,29 @@ function authenticate($user, $passwd) {
 
 }
 
-function addFavorite($user, $starName) {
+//checks if user has favorited a star, returns a boolean
+function hasBeenFavorited($user, $starName) {
 
     $dbh = connectDB();
 
-    $statement = $dbh->prepare("SELECT * FROM t_favorites WHERE f_username = :username and f_star = :star");
+    $statement = $dbh->prepare("SELECT count(*) FROM t_favorites WHERE f_username = :username and f_star = :star");
     $statement->bindParam(":username", $user);
     $statement->bindParam(":star", $starName);
     $result = $statement->execute();
     $row=$statement->fetch();
 
-    if($row == 0) {
+    $dbh = null;
+
+    return $row[0];
+}
+
+function addFavorite($user, $starName) {
+
+    $dbh = connectDB();
+
+    $booleap = hasBeenFavorited($user, $starName);
+
+    if($booleap == 0) {
         $statement = $dbh->prepare("INSERT into t_favorites VALUES (:username , :star)");
         $statement->bindParam(":username", $user);
         $statement->bindParam(":star", $starName);
@@ -52,6 +64,26 @@ function addFavorite($user, $starName) {
 
     $dbh = null;
 
+
+}
+
+function removeFavorite ($user, $starName) {
+
+    $dbh = connectDB();
+
+    $booleap = hasBeenFavorited($user, $starName);
+
+    if($booleap != 0) {
+        $statement = $dbh->prepare("DELETE from t_favorites where f_username = :username and f_star = :star");
+        $statement->bindParam(":username", $user);
+        $statement->bindParam(":star", $starName);
+        $result = $statement->execute();
+ 
+    }
+    //this is a test statement - user should not be able to double unfavorite a star once more code is implemented 
+    else echo "this star hasn't been favorited yet";
+
+    $dbh = null;
 
 }
 
