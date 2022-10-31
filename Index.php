@@ -132,7 +132,7 @@
             <script src="jsfunc.js"></script>
             <script>
                 
-                var arr = JSON.parse(<?php echo getStars()?>);
+                var arr = <?php echo getStars()?>;
                 let autoFillInput = document.getElementById("starName");
                 autoFillInput.addEventListener("keyup", function(){
                 removeElements();
