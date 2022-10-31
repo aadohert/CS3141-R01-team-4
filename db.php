@@ -359,6 +359,5 @@ function getStars(){
     return JSON_encode($names);
 }
 
-
 ?>
 </html> 

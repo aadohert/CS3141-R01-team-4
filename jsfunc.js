@@ -25,22 +25,6 @@ function themeChecker(){
 }
 
 var test = ["test", "test1", "science", "computer science"];
-let autoFillInput = document.getElementById("starName");
-autoFillInput.addEventListener("keyup", function(){
-    removeElements();
-    for(let i of test){
-        if(i.toLowerCase().startsWith(autoFillInput.value.toLowerCase()) && autoFillInput.value != ""){
-            let listItem = document.createElement("li");
-            listItem.classList.add("list-items");
-            listItem.style.cursor = "pointer";
-            listItem.setAttribute("onclick", "displayNames('" + i + "')");
-            let word = "<b>" + i.substring(0, autoFillInput.value.length) + "</b>";
-            word += i.substr(autoFillInput.value.length);
-            listItem.innerHTML = word;
-            document.querySelector(".autofill").appendChild(listItem);
-        }
-    }
-});
 function displayNames(value){
     autoFillInput.value = value;
     removeElements();
