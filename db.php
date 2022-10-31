@@ -359,5 +359,14 @@ function getStars(){
     return JSON_encode($names);
 }
 
+function isVisible($alt) {
+    if($alt < 0) {
+        return false;
+    }
+    return true;
+}
+
+
+
 ?>
 </html> 
