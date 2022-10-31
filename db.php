@@ -350,5 +350,15 @@ function radiansToDegrees ($radians) {
 }
 
 
+function getStars(){
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT name FROM t_stars");
+    $result = $statement->execute();
+    $names = $statement->fetch();
+    $dbh = NULL;
+    return JSON_encode($names);
+}
+
+
 ?>
 </html> 

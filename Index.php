@@ -45,10 +45,11 @@
                 <tr class = "star">
                     <td class = "star" >
                         <!-- star name form -->
-                            <form action = "Index.php">
+                            <form action = "Index.php" autocomplete="off">
                                 <div class="form-group">
                                     <input class="form-control" type="text" id="starName" name="starName" placeholder="Star Name" style="width: 150px">
                                 </div>
+                                <ul class="autofill"></ul>
                                 <div class="form-group">
                                     <input class="form-control" type="submit" value="Calculate" name="Calculate"> 
                                 </div>
