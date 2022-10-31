@@ -58,10 +58,10 @@
                         <!-- RA and DEC form -->
                             <form action = "Index.php">
                             <div class="form-group">
-                                <input class="form-control" type="text" id="RA" name="RA" placeholder="RA" style="width: 150px">
+                                <input class="form-control" type="text" id="RA" name="RA" placeholder="RA in Degrees" style="width: 150px">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" id="DEC" name="DEC" placeholder="DEC" style="width: 150px">
+                                <input class="form-control" type="text" id="DEC" name="DEC" placeholder="DEC in Degrees" style="width: 150px">
                             </div>
                             <div class="form-group">
                                 <input class="form-control" type="submit" value="Calculate" name="Calculate"> 
@@ -91,8 +91,8 @@
                                         if (!empty($_GET["RA"]) && !empty($_GET["DEC"])) {
                                             $starAlt = round(radiansToDegrees(altitudeWhenGivenCoords($_GET["RA"], $_GET["DEC"], 'now')), 2, PHP_ROUND_HALF_DOWN);
                                             $starAz = round(radiansToDegrees(azimuthWhenGivenCoords($_GET["RA"], $_GET["DEC"], 'now')), 2, PHP_ROUND_HALF_DOWN);
-                                            echo "<p>if the star exists it would be found at these points: </p>";
-                                            echo "<p>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
+                                            echo "<p>if the star exists it would be found at these points: ";
+                                            echo "<br>Star's Altitude: ".$starAlt."          Star's Azimuth: ".$starAz."</p>";
                                         }
                                     }
                                     else {
