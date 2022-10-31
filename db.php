@@ -59,7 +59,7 @@ function addFavorite($user, $starName) {
         $result = $statement->execute();
  
     }
-    //this is a test statement - user should not be able to double favorite a star once more code is implemented 
+    //this is a test statement - user should not be able to double favorite a star once more code is fully implemented 
     else echo "this star has been favorited already";
 
     $dbh = null;
@@ -80,7 +80,7 @@ function removeFavorite ($user, $starName) {
         $result = $statement->execute();
  
     }
-    //this is a test statement - user should not be able to double unfavorite a star once more code is implemented 
+    //this is a test statement - user should not be able to double unfavorite a star once code is fully implemented 
     else echo "this star hasn't been favorited yet";
 
     $dbh = null;
