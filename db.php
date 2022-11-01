@@ -110,8 +110,8 @@ function createUser($user, $passwd) {
 function updatePassword($user, $passwd) {
     
         $dbh = connectDB();
-        $statement = $dbh->prepare("UPDATE t_users SET passwd = :passwd, WHERE username = :username");
-        $statement->bindParam(":username", $user);
+        $statement = $dbh->prepare("UPDATE t_users SET passwd = sha2(:passwd, 256) WHERE username = :user");
+        $statement->bindParam(":user", $user);
         $statement->bindParam(":passwd", $passwd);
         $statement->execute();
         $dbh = null;
