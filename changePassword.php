@@ -34,10 +34,10 @@
                             if (strlen($_POST["password2"]) < 8) {
                                 echo '<p style="color:red">password must be at least 8 characters</p>';
                             }
-                            if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
+                            else if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
                                 echo '<p style="color:red">please fill in all boxes</p>';
                             }
-                            if($_POST["password"] == $_POST["password2"]) {
+                            else if($_POST["password"] == $_POST["password2"]) {
                                 echo '<p style="color:red">password already in use, please use a new password</p>';
                             }
                             else{
