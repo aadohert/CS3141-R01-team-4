@@ -27,7 +27,7 @@
                 printTopBanner();
             ?>
             </div></div></form>
-            </div></div> <a href="/changePassword.php">Change Password<a>
+            </div></div> <a href="/changePassword.php">Change Password</a>
             <hr>
             <?php 
                 if(isset($_POST["fav"])) {
