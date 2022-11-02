@@ -357,14 +357,14 @@ function getStars(){
     $names = $statement->fetchAll();
     $dbh = NULL;
 
-    $stars;
+    $stars = array();
     $i = 0;
     foreach($names as $name) {
         $stars[$i] = $name[0];
         $i++;
         }
 
-    return $stars;
+    return json_encode($stars);
 }
 
 function isVisible($alt) {
