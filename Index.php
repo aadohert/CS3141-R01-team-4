@@ -131,7 +131,7 @@
 
             <script src="jsfunc.js"></script>
             <script>
-                var = <?php echo getStars()?>;
+                var arr = <?php echo getStars()?>;
                 var limit = 0;
                 let autoFillInput = document.getElementById("starName");
                 autoFillInput.addEventListener("keyup", function(){
