@@ -354,9 +354,10 @@ function getStars(){
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT name FROM t_stars");
     $result = $statement->execute();
-    $names = $statement->fetch();
+    $names = $statement->fetchAll();
     $dbh = NULL;
-    return JSON_encode($names);
+
+    return $names;
 }
 
 function isVisible($alt) {
