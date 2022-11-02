@@ -131,8 +131,6 @@
 
             <script src="jsfunc.js"></script>
             <script>
-                
-                var arr = <?php echo getStars();?>;
                 var limit = 0;
                 let autoFillInput = document.getElementById("starName");
                 autoFillInput.addEventListener("keyup", function(){
@@ -140,6 +138,7 @@
                 for(let i of arr){
                     if(i.toLowerCase().startsWith(autoFillInput.value.toLowerCase()) && autoFillInput.value != ""){
                         if(limit >= 4){
+                            limit = 0;
                             break;
                         }
                         limit++;
