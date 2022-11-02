@@ -132,12 +132,17 @@
             <script src="jsfunc.js"></script>
             <script>
                 
-                var arr = <?php echo getStars()?>;
+                var arr = <?php echo getStars();?>;
+                var limit = 0;
                 let autoFillInput = document.getElementById("starName");
                 autoFillInput.addEventListener("keyup", function(){
                 removeElements();
-                for(let i of test){
+                for(let i of arr){
                     if(i.toLowerCase().startsWith(autoFillInput.value.toLowerCase()) && autoFillInput.value != ""){
+                        if(limit >= 4){
+                            break;
+                        }
+                        limit++;
                         let listItem = document.createElement("li");
                         listItem.classList.add("list-items");
                         listItem.style.cursor = "pointer";
