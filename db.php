@@ -362,8 +362,8 @@ function getStars(){
     foreach($names as $name) {
         $stars[$i] = $name[0];
         $i++;
-        }
-
+    }
+    sort($stars);
     return json_encode($stars);
 }
 

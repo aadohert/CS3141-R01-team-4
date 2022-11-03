@@ -23,8 +23,6 @@ function themeChecker(){
         darkmode();
     }
 }
-
-var test = ["test", "test1", "science", "computer science"];
 function displayNames(value){
     autoFillInput.value = value;
     removeElements();

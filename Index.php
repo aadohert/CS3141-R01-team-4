@@ -134,14 +134,10 @@
                 var arr = <?php echo getStars()?>;
                 var limit = 0;
                 let autoFillInput = document.getElementById("starName");
-                autoFillInput.addEventListener("keyup", function(){
+                autoFillInput.addEventListener("keyup", (e) =>{
                 removeElements();
-                for(let i of arr){
+                for(let i of test){
                     if(i.toLowerCase().startsWith(autoFillInput.value.toLowerCase()) && autoFillInput.value != ""){
-                        if(limit >= 4){
-                            limit = 0;
-                            break;
-                        }
                         limit++;
                         let listItem = document.createElement("li");
                         listItem.classList.add("list-items");
@@ -151,6 +147,10 @@
                         word += i.substr(autoFillInput.value.length);
                         listItem.innerHTML = word;
                         document.querySelector(".autofill").appendChild(listItem);
+                    }
+                    if(limit == 4){
+                        limit = 0;
+                        break;
                     }
                  }
             });
