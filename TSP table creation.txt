@@ -15,7 +15,7 @@ PRIMARY KEY (name)
 
 
 create table t_favorites (
-f_username varchar(50) NOT NULL ,
+f_username varchar(50) NOT NULL,
 f_star varchar(256) not null,
 forign key(f_username) references t_users(username),
 forign key(f_star) references t_stars(name)

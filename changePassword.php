@@ -48,7 +48,7 @@
                             }
                         }  
                         else {
-                            echo '<p style="color:red"> incorrect password for account</p>' ; 
+                            echo '<p style="color:red"> incorrect password for account</p>' ;        
                         }
                     }
                 ?>

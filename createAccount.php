@@ -51,8 +51,6 @@
                 }
                 //error if passwords don't match
                 else echo '<p style="color:red">passwords do not match</p>';
-            
-                
             }
             
         ?>

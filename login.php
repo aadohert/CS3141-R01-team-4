@@ -28,8 +28,6 @@
                 //if user is logged in, send them to index page instead
                 if(isset($_SESSION["user"])) header('LOCATION:Index.php');
 
-
-
             ?>
 
             <hr>
@@ -37,12 +35,34 @@
                 <?php 
                     if(isset($_POST["login"])) {
                         $auth = authenticate($_POST["username"], $_POST["password"]);
-                        if($auth[0] == 1) {
+                        $count = checkCount($_POST["username"]);
+                        if($auth[0] == 1 && $count <= 3) {
                             $_SESSION["user"]=$auth[1];
                             header("LOCATION:Index.php");
+                            $count = countZero($_POST["username"]);
                             }  
                         else {
-                            echo '<p style="color:red"> incorrect username and password</p>' ; 
+                            echo '<p style="color:red"> incorrect username and password</p>' ;
+                            $checkUser = checkUser($_POST["username"]);
+                            if($checkUser[0] == 1) 
+                            {
+                                $count = addCount($_POST["username"]);
+                                if ($count = 4)
+                                {
+                                    echo '<p style="color:red"> account is locked for 10 seconds</p>' ;
+                                    $lockouttime = time(); 
+                                }
+                                if ($count > 4)
+                                {
+                                    if(time() - $lockouttime < 10)
+                                    {
+                                    echo '<p style="color:red"> account is still locked</p>' ;
+                                    }else
+                                    {
+                                        $count = countZero($_POST["username"]);
+                                    }
+                                }
+                            }
                         }
                     }
                 ?>
