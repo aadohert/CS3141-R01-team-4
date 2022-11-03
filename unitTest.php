@@ -14,19 +14,19 @@
             //Alt and Azimuth of betelguese on 1-1-2021 at 8 am
             $date2021 = '1-1-2021 08:00:00'; 
             //Doesn't work unless I got to 3 am that day
-            echo "<br>". "Test 5.5: ". lstWhenGivenDate($date2021) . "= 207.85";
-            echo "<br>". "Test 5 Alt: ". altitudeWhenGivenCoords(88.79, 7.40855, $date2021) * (180/(pi())). " = -13 18' 43.4''";
-            echo "<br>". "Test 6 Az: ". azimuthWhenGivenCoords(88.79, 7.40855, $date2021) * (180/(pi())). " =  296 42' 45.2''";
+            echo "<br>". "Test 5.5: ". lstWhenGivenDate($date2021) . "= 132.66";
+            echo "<br>". "Test 5 Alt: ". altitudeWhenGivenCoords(88.79, 7.40855, $date2021) * (180/(pi())). " = 35.51";
+            echo "<br>". "Test 6 Az: ". azimuthWhenGivenCoords(88.79, 7.40855, $date2021) * (180/(pi())). " =  237.61";
             //Alt and Azimuth of betelguese on 5-6-1998 at 6pm
             $date1998 = '5-6-1998 18:00:00';
             echo "<br>". "Test 7.5: ". lstWhenGivenDate($date1998);
-            echo "<br>". "Test 7 Alt: ". altitudeWhenGivenCoords(88.79, 7.40855, $date1998) * (180/(pi())). " = 33 48' 10.1''";           
-            echo "<br>". "Test 8 Az: ". azimuthWhenGivenCoords(88.79, 7.40855, $date1998) * (180/(pi())). " = 240 27' 36.8''";
+            echo "<br>". "Test 7 Alt: ". altitudeWhenGivenCoords(88.79, 7.40855, $date1998) * (180/(pi())). " = 48.68";           
+            echo "<br>". "Test 8 Az: ". azimuthWhenGivenCoords(88.79, 7.40855, $date1998) * (180/(pi())). " = 200.30";
              //Alt and Azimuth of betelguese on 19-8-2032 at noon
              $date2032 = '19-8-2032 12:00:00';
              echo "<br>". "Test 9.5: ". lstWhenGivenDate($date2032). "";
-             echo "<br>". "Test 9 Alt: ". altitudeWhenGivenCoords(88.79, 7.40855, $date2032) * (180/(pi())). " = 42 24' 34.4''";             
-             echo "<br>". "Test 10 Az: ". azimuthWhenGivenCoords(88.79, 7.40855, $date2032) * (180/(pi())). " = 223 23' 40.5''";    
+             echo "<br>". "Test 9 Alt: ". altitudeWhenGivenCoords(88.79, 7.40855, $date2032) * (180/(pi())). " = 43.24";             
+             echo "<br>". "Test 10 Az: ". azimuthWhenGivenCoords(88.79, 7.40855, $date2032) * (180/(pi())). " = 221.18";    
              
 
 

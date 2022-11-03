@@ -91,7 +91,7 @@ function removeFavorite ($user, $starName) {
 function createUser($user, $passwd) {
     try {
         $dbh = connectDB();
-        $statement = $dbh->prepare("INSERT into t_users VALUES ( :username, sha2(:passwd, 256) )");
+        $statement = $dbh->prepare("INSERT into t_users VALUES ( :username, sha2(:passwd, 256), 0 )");
         $statement->bindParam(":username", $user);
         $statement->bindParam(":passwd", $passwd);
         $statement->execute();
@@ -105,6 +105,44 @@ function createUser($user, $passwd) {
         
     }
 }
+
+function checkUsername($user)
+{
+    $statement = $dbh->prepare("SELECT EXISTS(SELECT * from t_users WHERE user= :username);");
+    $statement->bindParam(":username", $user);
+    $result = $statement->execute();
+    $statement->fetch();
+    $row=$statement->fetch();
+    $dbh=null;
+    return $row;
+}
+
+function addCount($user)
+{
+    $dbh = connectDB();
+        $statement = $dbh->prepare("UPDATE t_users SET counter = counter + 1 WHERE username = :user");
+        $statement->bindParam(":user", $user);
+        $statement->execute();
+        $count = $dbh->query("SELECT counter FROM t_users WHERE username = :user;");
+        $dbh = null;
+        return $count;
+}
+
+function checkCount($user)
+{
+    $dbh = connectDB();
+        $count = $dbh->query("SELECT counter FROM t_users WHERE username = :user;");
+        return $count;
+}
+
+
+function countZero($user)
+{
+    $dbh = connectDB();
+        $statement = $dbh->prepare("UPDATE t_users SET counter = 0 WHERE username = :user");
+        return $statement;
+}
+
 
 //updates the password of a user
 function updatePassword($user, $passwd) {
