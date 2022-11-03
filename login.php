@@ -43,7 +43,7 @@
                             }  
                         else {
                             echo '<p style="color:red"> incorrect username and password</p>' ;
-                            $checkUser = checkUser($_POST["username"]);
+                            $checkUser = checkUsername($_POST["username"]);
                             if($checkUser[0] == 1) 
                             {
                                 $count = addCount($_POST["username"]);
