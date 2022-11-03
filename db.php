@@ -108,6 +108,7 @@ function createUser($user, $passwd) {
 
 function checkUsername($user)
 {
+    $dbh = connectDB();
     $statement = $dbh->prepare("SELECT EXISTS(SELECT * from t_users WHERE user= :username);");
     $statement->bindParam(":username", $user);
     $result = $statement->execute();
