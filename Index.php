@@ -67,12 +67,40 @@
                                 <input class="form-control" type="submit" value="Calculate" name="Calculate"> 
                             </div>  
                             </form>
-
+                            <form action="Index.php" class="randomStar">
+                                <div>
+                                    <input class="form-control" type="submit" value="randomStar" name="randomStar">
+                                </div>
+                            </form>
                     </td>
                     <td class = "star">
                         <?php 
+                            if(isset($_GET["randomStar"])){
+                                $stars = getStars();
+                                $starName = $stars[rand(0, (sizeof($stars)-1))];
+                                $starInfo = queryStarByName($starName);
+
+                                echo '<h1>Star Name: '.$starInfo[0].'</h1>';
+                                $_SESSION["star"] = $starInfo[0];
+                                if(!is_null($starInfo[3])) echo '<p>Constellation: '.$starInfo[3].' </p>';
+                                echo '<p>About: '.$starInfo[4].'</p>';
+
+                                $starAlt = round(radiansToDegrees(altitudeWhenGivenName($starInfo[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                                $starAz = round(radiansToDegrees(azimuthWhenGivenName($starInfo[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                                        
+                                //echo "<p> DEC: ".$star[2]." RA: ".$star[1]." </p>";
+                                echo "<p>Star can be found at <br>";
+                                echo 'Altitude: '.$starAlt.' Azimuth: '.$starAz.'</p>';
+                                              
+                                if (isset($_SESSION["user"])) {
+                                    $favorited = hasBeenFavorited($_SESSION["user"], $_SESSION["star"]);
+
+                                    if(0 == $favorited) echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
+                                    else echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
+                                }
+                            }
                             //default if button hasn't been hit
-                            if(!isset($_GET["Calculate"])) {
+                            else if(!isset($_GET["Calculate"])) {
                                 echo "<h1> Welcome to the Starfinder site!</h1>
                                 <p> Put a star's name or its right ascension and declination to find where it is relative to Houghton, Michigan </p>";
                             }
@@ -131,14 +159,12 @@
 
             <script src="jsfunc.js"></script>
             <script>
-                var arr = <?php echo getStars()?>;
-                var limit = 0;
+                var arr = <?php echo json_encode(getStars())?>;
                 let autoFillInput = document.getElementById("starName");
                 autoFillInput.addEventListener("keyup", (e) =>{
                 removeElements();
-                for(let i of test){
+                for(let i of arr){
                     if(i.toLowerCase().startsWith(autoFillInput.value.toLowerCase()) && autoFillInput.value != ""){
-                        limit++;
                         let listItem = document.createElement("li");
                         listItem.classList.add("list-items");
                         listItem.style.cursor = "pointer";
@@ -147,10 +173,6 @@
                         word += i.substr(autoFillInput.value.length);
                         listItem.innerHTML = word;
                         document.querySelector(".autofill").appendChild(listItem);
-                    }
-                    if(limit == 4){
-                        limit = 0;
-                        break;
                     }
                  }
             });
