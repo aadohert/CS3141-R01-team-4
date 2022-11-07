@@ -27,6 +27,7 @@
     <body onload="themeChecker()">
             <?php 
                 printTopBanner();
+                if(!isset($_SESSION["user"])) header('LOCATION:Index.php');
             ?>
         <hr>
         <?php
