@@ -80,7 +80,7 @@
                                 echo "<h1> Welcome to the Starfinder site!</h1>
                                 <p> Put a star's name or its right ascension and declination to find where it is relative to Houghton, Michigan </p>";
                             }
-                            elseif(isset($_GET["Random Star"])){
+                            elseif(isset($_GET["randomStar"])){
                                 $stars = getStars();
                                 $starName = $stars[rand(0, sizeof($stars))];
                                 $starInfo = queryStarByName($starName);
