@@ -164,7 +164,7 @@
                 let autoFillInput = document.getElementById("starName");
                 autoFillInput.addEventListener("keyup", (e) =>{
                 removeElements();
-                for(let i of test){
+                for(let i of arr){
                     if(i.toLowerCase().startsWith(autoFillInput.value.toLowerCase()) && autoFillInput.value != ""){
                         limit++;
                         let listItem = document.createElement("li");
