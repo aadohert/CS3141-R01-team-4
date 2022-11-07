@@ -231,8 +231,10 @@ function getLatitude() {
     return 47.1211;
 }
 
-//Since php does not allow function overloading, I have two versions of the hour angle formula
+
 //The hour angle is required for calculating the position of a star in the night sky
+//When given the date and the Ra of a star, the hour angle can be found
+//This function takes advantage of the Local sidereal time function
 function hourAngleWhenGivenRa($givenRa, $date) {
     $HA = lstWhenGivenDate($date) - $givenRa;
     if($HA < 0) {
@@ -241,18 +243,14 @@ function hourAngleWhenGivenRa($givenRa, $date) {
     return $HA;
 }
 
-//Since php does not allow function overloading, I have two versions of the hour angle formula
-//The hour angle is required for calculating the position of a star in the night sky
-function hourAngleWhenGivenName($starName, $date) {
-    $HA = lstWhenGivenDate($date) - raWithName($starName);
-    if($HA < 0) {
-        $HA = $HA + 360;
-    } 
-    return $HA;
-}
 
-//The altitude is the height in the sky that the star is 
+
+//The altitude is the height in the sky that the star is
+//The altitude is given in radians and have to be converted to degrees 
+//This specific functions takes in the star name in order to get the requisite information
 function altitudeWhenGivenName($starName, $date) {
+    //the altitude equation is sin(Declination)*sin(lattitude) + cos(Declination) * cos(latitude) * cos(Hour angle)
+    //All the angles have to be in radians
     $ra = raWithName($starName);
     $dec = decWithName($starName);
     $givenHa = (hourAngleWhenGivenRa($ra, $date) * ((pi())/180));
@@ -266,7 +264,11 @@ function altitudeWhenGivenName($starName, $date) {
 }
 
 //The azimuth is the horizontal line that the star is in the night sky
+//The azimuth is given in radians and have to be converted to degrees
+//This specific functions takes in the star name in order to get the requisite information
 function azimuthWhenGivenName($starName, $date) {
+    //The azimuth equation is (sin(declination) - sin(altitude) * sin(latitude)) / (cos(altitude) * cos(latittude))
+    //All angles have to be in radians
     $givenRa = raWithName($starName);
     $givenDec = decWithName($starName);
     $givenHa = (hourAngleWhenGivenRa($givenRa, $date) * ((pi())/180));
@@ -287,7 +289,11 @@ function azimuthWhenGivenName($starName, $date) {
 }
 
 //The altitude is the height in the sky that the star is 
+//The altitude is given in radians and needs to be converted into degrees
+//This specific function takes in the RA and DEC to get the proper information
 function altitudeWhenGivenCoords($givenRa, $givenDec, $date) {
+    //the altitude equation is sin(Declination)*sin(lattitude) + cos(Declination) * cos(latitude) * cos(Hour angle)
+    //All the angles have to be in radians
     $givenHa = (hourAngleWhenGivenRa($givenRa, $date) * ((pi())/180));
     $givenRa = $givenRa * ((pi())/180);
     $givenDec = $givenDec * ((pi())/180);
@@ -299,7 +305,11 @@ function altitudeWhenGivenCoords($givenRa, $givenDec, $date) {
 }
 
 //The azimuth is the horizontal line that the star is in the night sky
+//The azimumth is given in radians and needs to be converted into degrees
+//This specific function takes in the RA and DEC to get the proper information
 function azimuthWhenGivenCoords($givenRa, $givenDec, $date) {
+    //The azimuth equation is (sin(declination) - sin(altitude) * sin(latitude)) / (cos(altitude) * cos(latittude))
+    //All angles have to be in radians
     $givenHa = (hourAngleWhenGivenRa($givenRa, $date) * ((pi())/180));
     $givenRa = $givenRa * ((pi())/180);
     $givenDec = $givenDec * ((pi())/180);
@@ -318,6 +328,7 @@ function azimuthWhenGivenCoords($givenRa, $givenDec, $date) {
 }
 
 //The ra is one of the star values needed to calculate its position
+//This function takes in a star name and if it is in the system, then it gives the RA of the star
 function raWithName($starName) {
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT r_ang FROM t_stars "
@@ -330,6 +341,7 @@ function raWithName($starName) {
 }
 
 //The dec is one of the star values needed to calculate its position
+//This function takes in a star name and if it is in the system, then it gives the DEC of the star
 function decWithName($starName) {
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT dec_ang FROM t_stars "
@@ -341,21 +353,18 @@ function decWithName($starName) {
     return $row[0];
 }
 
-//The ra is one of the star values needed to calculate its position
-function raWhenGivenRa($ra) {
-    return $ra;
-}
-
-//The dec is one of the star values needed to calculate its position
-function decWhenGivenDec($dec) {
-    return $dec;
-}
-
+//This function returns the local sidereal time when not given a date
+//When used, it takes the date to be the current moment and calculates the data based sidereal time based off of that
 function lstWhenNotGivenDate() {
     date_default_timezone_set('UTC');
+    //number of days since J2000
     $d = strtotime('now') - strtotime('1-1-2000 12:00:00');
     $long = -88.5254;
+    //Universal Time of the day
     $UT = (date('H')) + (date('i')/60) + (date('s')/3600);
+    //0.98567 is the length of a sidereal day
+    //86400 is the amount of seconds in a day
+    //sidereal days + universal time + 100.46 + longitude = local sidereal time
     $lst = (0.985647 * ($d/86400)) + (15 * $UT) + 100.46 + $long; 
     while($lst > 360) {
         $lst = $lst - 360;
@@ -366,12 +375,19 @@ function lstWhenNotGivenDate() {
     return $lst;
 }
 
+//This function returns the local sidereal time when given a date
+//When used, it takes the date in the format dd-mm-yyyy hh:ii:ss
 function lstWhenGivenDate($date) {
     date_default_timezone_set('UTC');
     $date = strtotime($date);
+    //number of days since J2000
     $d = $date - strtotime('1-1-2000 12:00:00');
     $long = -88.5254;
+    //Universal Time of the day
     $UT = (date('H', $date)) + (date('i', $date)/60) + (date('s', $date)/3600);
+     //0.98567 is the length of a sidereal day
+    //86400 is the amount of seconds in a day
+    //sidereal days + universal time + 100.46 + longitude = local sidereal time
     $lst = (0.985647 * ($d/86400)) + (15 * $UT) + 100.46 + $long; 
     while($lst > 360) {
         $lst = $lst - 360;
