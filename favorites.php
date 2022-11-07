@@ -29,6 +29,12 @@
                 printTopBanner();
             ?>
         <hr>
-
+        <?php
+        $favs = viewFavorites($_SESSION["user"]);
+        foreach($favs as $star) {
+            echo "<p>name: ".$star[0]."</p>";
+        }
+        
+        ?>
         <script src="jsfunc.js"></script>
     </body>
