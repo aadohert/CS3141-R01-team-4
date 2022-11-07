@@ -403,7 +403,7 @@ function getStars(){
         $i++;
     }
     sort($stars);
-    return json_encode($stars);
+    return ($stars);
 }
 
 function isVisible($alt) {
