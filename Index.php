@@ -77,7 +77,7 @@
                         <?php 
                             if(isset($_GET["randomStar"])){
                                 $stars = getStars();
-                                $starName = $stars[rand(0, sizeof($stars))];
+                                $starName = $stars[rand(0, (sizeof($stars)-1))];
                                 $starInfo = queryStarByName($starName);
 
                                 echo '<h1>Star Name: '.$starInfo[0].'</h1>';
