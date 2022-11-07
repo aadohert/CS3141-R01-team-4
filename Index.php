@@ -69,18 +69,13 @@
                             </form>
                             <form action="Index.php" class="randomStar">
                                 <div>
-                                    <input class="form-control" type="submit" value="Random Star" name="randomStar">
+                                    <input class="form-control" type="submit" value="randomStar" name="randomStar">
                                 </div>
                             </form>
                     </td>
                     <td class = "star">
                         <?php 
-                            //default if button hasn't been hit
-                            if(!isset($_GET["Calculate"])) {
-                                echo "<h1> Welcome to the Starfinder site!</h1>
-                                <p> Put a star's name or its right ascension and declination to find where it is relative to Houghton, Michigan </p>";
-                            }
-                            elseif(isset($_GET["randomStar"])){
+                            if(isset($_GET["randomStar"])){
                                 $stars = getStars();
                                 $starName = $stars[rand(0, sizeof($stars))];
                                 $starInfo = queryStarByName($starName);
@@ -103,6 +98,11 @@
                                     if(0 == $favorited) echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
                                     else echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
                                 }
+                            }
+                            //default if button hasn't been hit
+                            else if(!isset($_GET["Calculate"])) {
+                                echo "<h1> Welcome to the Starfinder site!</h1>
+                                <p> Put a star's name or its right ascension and declination to find where it is relative to Houghton, Michigan </p>";
                             }
                             //runs if calculate is hit
                             else {
