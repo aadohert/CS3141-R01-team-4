@@ -87,6 +87,20 @@ function removeFavorite ($user, $starName) {
 
 }
 
+function viewFavorites ($user) {
+    $dbh = connectDB();
+
+    $statement = $dbh->prepare("SELECT distinct name, r_ang, dec_ang, const, description 
+                                FROM (t_stars join t_favorites on name = f_star)  
+                                WHERE f_username = ':username'");
+    $statement->bindParam(":username", $user);
+    $result = $statement->execute();
+    $stars = $statement->fetchAll();
+
+    return $stars; 
+
+}
+
 //creates a new account given a username and password, throws an error if the username is taken 
 function createUser($user, $passwd) {
     try {
@@ -132,16 +146,16 @@ function addCount($user)
 function checkCount($user)
 {
     $dbh = connectDB();
-        $count = $dbh->query("SELECT counter FROM t_users WHERE username = :user;");
-        return $count;
+        //$count = $dbh->query("SELECT counter FROM t_users WHERE username = :user;");
+        //return $count;
 }
 
 
 function countZero($user)
 {
     $dbh = connectDB();
-        $statement = $dbh->prepare("UPDATE t_users SET counter = 0 WHERE username = :user");
-        return $statement;
+        //$statement = $dbh->prepare("UPDATE t_users SET counter = 0 WHERE username = :user");
+        //return $statement;
 }
 
 
