@@ -178,7 +178,6 @@
                     }
                     if(limit == 4){
                         limit = 0;
-                        removeElements();
                         break;
                     }
                  }
