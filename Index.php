@@ -14,7 +14,7 @@
     
 
     <head>
-        <link rel="stylesheet" href="\style.css">
+        <link rel="stylesheet" href="style.css">
         <title>Star Finder</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -154,7 +154,7 @@
                 </tr>
 
                 </div>
-            <td> <?php if (isset($_SESSION["user"])) echo '<a href="\changePassword.php">Change Password</a>'; ?> </td>
+            <td> <?php if (isset($_SESSION["user"])) echo '<a href="/changePassword.php">Change Password</a>'; ?> </td>
             </table>
 
             <script src="jsfunc.js"></script>
