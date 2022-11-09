@@ -8,7 +8,11 @@
             $second = gmdate("s") / 3600;
             $allTime = $hour + $minute + $second;
             echo $allTime;**/
-            echo getStars()[0];
+            $stars = getStars();
+
+            foreach($stars as $star) {
+                echo $star . "<br>";
+            }
         ?>
     </body>
 </html>

@@ -13,7 +13,7 @@
 <html lang="eng">
 
     <head>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="\style.css">
         <title>Star Finder</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -81,7 +81,7 @@
 
             
                 </p>   
-                No account? <a href="/createAccount.php">Click here to create one!<a>
+                No account? <a href="\createAccount.php">Click here to create one!<a>
                 
 
                 </p>    
