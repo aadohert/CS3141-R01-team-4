@@ -81,7 +81,7 @@
 
             
                 </p>   
-                No account? <a href="/createAccount.php">Click here to create one!<a>
+                No account? <a href='createAccount.php'>Click here to create one!<a>
                 
 
                 </p>    

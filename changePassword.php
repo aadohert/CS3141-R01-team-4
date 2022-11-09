@@ -55,7 +55,7 @@
              
         
 
-            <form method="post" action="changepassword.php">
+            <form method="post" action="changePassword.php">
 
 <label for="username"><strong>username: <br></strong></label> 
 <input type="text" id="username" name="username"> 
