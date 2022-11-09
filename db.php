@@ -112,8 +112,8 @@ function createUser($user, $passwd) {
         return $user;
     }
     catch (Exception $e) {
-        echo '<p style="color:red">the username "'.$user.'" is already taken, please try another one</p>';
-        $dbh = null;
+        //echo '<p style="color:red">the username "'.$user.'" is already taken, please try another one</p>';
+        //$dbh = null;
         
     }
 }
@@ -217,7 +217,11 @@ function printTopBanner() {
                 <th id="Icon"><h1><a href= \'Index.php\' style="margin-left: 15px;" id="ahrefI" class="a-style">Star Finder</a></h1></th>
                 <th class="switch"><form><input type="checkbox" name="sldr" id="slider" onchange="darkmode()"></form></th>';
 
-    if(isset($_SESSION["user"])) echo '<th class="navbar-right-align"><h3><a href= \'favorites.php\' id="ahrefF" class="a-style">'.$_SESSION["user"].'\'s Favorites</a></h3></th>';
+    if(isset($_SESSION["user"])){
+        $username = str_replace("<", "&lt", $_SESSION["user"]);
+        $username = str_replace(">", "&gt", $username);
+         echo '<th class="navbar-right-align"><h3><a href= \'favorites.php\' id="ahrefF" class="a-style">' .$username.'\'s Favorites</a></h3></th>';
+    }
     else echo '<th class="navbar-right-align"><h3><a href=\'login.php\' id="ahrefF" class="a-style">Favorites</a></h3></th>';
         
              
