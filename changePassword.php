@@ -28,27 +28,31 @@
             ?><hr><?php
             
                     if(isset($_POST["changePassword"])) {
-                        $auth = authenticate($_POST["username"], $_POST["password"]);
-                        if($auth[0] == 1) {
-                            //$_SESSION["user"]=$auth[1];
-                            if (strlen($_POST["password2"]) < 8) {
-                                echo '<p style="color:red">password must be at least 8 characters</p>';
+                        if($_SESSION["user"] != $_POST["username"]) echo '<p>'.$_SESSION["user"].'</p><p style="color:red">username incorrect</p>';
+                        else { 
+                            $auth = authenticate($_POST["username"], $_POST["password"]);
+                            if($auth[0] == 1) {
+                                //$_SESSION["user"]=$auth[1];
+                                if (strlen($_POST["password2"]) < 8) {
+                                    echo '<p style="color:red">password must be at least 8 characters</p>';
+                                }
+                                else if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
+                                    echo '<p style="color:red">please fill in all boxes</p>';
+                                }
+                                else if($_POST["password"] == $_POST["password2"]) {
+                                    echo '<p style="color:red">password already in use, please use a new password</p>';
+                                }
+                                else{
+                                    updatePassword($_POST["username"], $_POST["password2"]);
+                                //$_SESSION["user"]=$_POST["username"];
+                                //header("LOCATION:Index.php");
+                                echo '<p style="color:green">password has been updated</p>' ;
+                                }
+                            }  
+                        
+                            else {
+                                echo '<p style="color:red"> incorrect password for account</p>' ;        
                             }
-                            else if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
-                                echo '<p style="color:red">please fill in all boxes</p>';
-                            }
-                            else if($_POST["password"] == $_POST["password2"]) {
-                                echo '<p style="color:red">password already in use, please use a new password</p>';
-                            }
-                            else{
-                                updatePassword($_POST["username"], $_POST["password2"]);
-                            //$_SESSION["user"]=$_POST["username"];
-                            //header("LOCATION:Index.php");
-                            echo '<p style="color:green">password has been updated</p>' ;
-                            }
-                        }  
-                        else {
-                            echo '<p style="color:red"> incorrect password for account</p>' ;        
                         }
                     }
                 ?>
