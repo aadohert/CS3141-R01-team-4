@@ -109,10 +109,13 @@ table.star, tr.star, td.star {
     border-top-style: none;
     border-right-style: none;
     border-left-style: none;
-    
+    transition:all 1.5s ease;
+    border: none;
+    border-bottom: 3px solid grey;
   }
   .login-input-field:focus{
     outline: none;
+    border-bottom: 3px solid rgb(10, 245, 10);
   }
   .login-button-div{
     margin-top: 30px;
