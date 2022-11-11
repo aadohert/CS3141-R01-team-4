@@ -10,7 +10,7 @@
      
 //used to connect to the database, needed to run any mysql queries 
 function connectDB() {
-    $config = parse_ini_file("StarfinderTest.ini");
+    $config = parse_ini_file("Starfinder.ini");
     $dbh = new PDO($config['dsn'], $config['username'], $config['password']);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbh;
