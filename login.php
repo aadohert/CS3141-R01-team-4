@@ -67,26 +67,26 @@
                     }
                 ?>
                 <div class="wrap-login-container">
-                <div class="login-container">
-                    <form method="post" action="login.php">
-                        <span class="login-title"><strong>Login</strong></span>
-                        <div class="login-input">
-                            <label for="username" class="login-input-label"><strong>Username</strong></label> 
-                            <input type="text" id="username" name="username" class="login-input-field"> 
-                        </div>
-                        <div class="login-input">
-                            <label for="password" class="login-input-label"><strong>Password</strong></label> 
-                            <input type="password" id="password" name="password" class="login-input-field">
-                        </div>
-                        <div class="login-button-div">
-                            <input type="submit" name="login" value="login" class="login-button">
-                        </div>
-                        <div>
-                            </p>   
-                                No account? <a href="/createAccount.php">Click here to create one!<a>
-                            </p>
-                        </div>
-                </div>
+                    <div class="login-container">
+                        <form method="post" action="login.php">
+                            <span class="login-title"><strong>Login</strong></span>
+                            <div class="login-input">
+                                <label for="username" class="login-input-label"><strong>Username</strong></label> 
+                                <input type="text" id="username" name="username" class="login-input-field"> 
+                            </div>
+                            <div class="login-input">
+                                <label for="password" class="login-input-label"><strong>Password</strong></label> 
+                                <input type="password" id="password" name="password" class="login-input-field">
+                            </div>
+                            <div class="login-button-div">
+                                <input type="submit" name="login" value="login" class="login-button">
+                            </div>
+                            <div>
+                                </p>   
+                                    No account? <a href="/createAccount.php">Click here to create one!<a>
+                                </p>
+                            </div>
+                    </div>
                 </div>
             <script src="jsfunc.js"></script>
     </body>

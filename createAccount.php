@@ -55,23 +55,27 @@
             
         ?>
 
-        <form method="post" action="createAccount.php">
-
-        <label for="username"><strong>username:<br> </strong></label> 
-        <input type="text" id="username" name="username"> 
-        <br> <br>
-
-        <label for="password"><strong>password:<br> </strong></label> 
-        <input type="password" id="password1" name="password1">
-        <br> <br>
-
-        <label for="password2"><strong>confirm password:<br> </strong></label> 
-        <input type="password" id="password2" name="password2">
-        <br> <br>
-
-        <input type="submit" name="create" value="create">
-
-
+        <div class="wrap-login-container">
+                    <div class="login-container">
+                        <form method="post" action="createAccount.php">
+                            <span class="login-title"><strong>Create Account</strong></span>
+                            <div class="login-input">
+                                <label for="username" class="login-input-label"><strong>Username</strong></label> 
+                                <input type="text" id="username" name="username" class="login-input-field" autocomplete="off"> 
+                            </div>
+                            <div class="login-input">
+                                <label for="password" class="login-input-label"><strong>Password</strong></label> 
+                                <input type="password" id="password1" name="password1" class="login-input-field" autocomplete="off">
+                            </div>
+                            <div class="login-input">
+                                <label for="password2" class="login-input-label"><strong>Confirm Password</strong></label> 
+                                <input type="password" id="password2" name="password2" class="login-input-field" autocomplete="off">
+                            </div>
+                            <div class="login-button-div">
+                                <input type="submit" name="create" value="create" class="login-button">
+                            </div>
+                    </div>
+                </div>
         </form>
         
         <script src="jsfunc.js"></script>
