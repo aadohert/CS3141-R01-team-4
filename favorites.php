@@ -43,6 +43,14 @@
             $_SESSION["star"] = $starInfo[0];
             if(!is_null($starInfo[3])) echo '<p>Constellation: '.$starInfo[3].' </p>';
             echo '<p>About: '.$starInfo[4].'</p>';
+
+            $starAlt = round(radiansToDegrees(altitudeWhenGivenName($starInfo[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+            $starAz = round(radiansToDegrees(azimuthWhenGivenName($starInfo[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                    
+            //echo "<p> DEC: ".$star[2]." RA: ".$star[1]." </p>";
+            echo "<p>Star can be found at <br>";
+            echo 'Altitude: '.$starAlt.' Azimuth: '.$starAz.'</p>';
+
             echo '<form method = "post" action = "favorites.php"> <button id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
             echo '<br>';
         }
