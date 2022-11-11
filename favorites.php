@@ -28,12 +28,39 @@
             <?php 
                 printTopBanner();
                 if(!isset($_SESSION["user"])) header("LOCATION:Index.php");
+
+                if (isset ($_POST["unfav"])) {
+                    
+                    removeFavorite($_SESSION["user"], $_SESSION["star"]);
+
+                } 
             ?>
         <hr>
         <?php
+        if(isset($_POST["favStar"])) {
+            $starInfo = queryStarByName($_POST["favStar"]);
+            echo '<h1>Star Name: '.$starInfo[0].'</h1>';
+            $_SESSION["star"] = $starInfo[0];
+            if(!is_null($starInfo[3])) echo '<p>Constellation: '.$starInfo[3].' </p>';
+            echo '<p>About: '.$starInfo[4].'</p>';
+            echo '<form method = "post" action = "favorites.php"> <button id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
+            echo '<br>';
+        }
+        else {
+            echo "<h1>".$_SESSION["user"]."'s Favorites</h1>";
+            echo "<p>select a star below to view info about it</p> <br>";
+        }
         $favs = viewFavorites($_SESSION["user"]);
+        if(empty($favs)) echo "<p>You have no favorited stars! Go to the index page and find some to favorite :)";
         foreach($favs as $star) {
-            echo "<p>name: ".$star[0]."</p>";
+            //echo "<p>name: ".$star[0]."</p>";
+            echo '
+            <form method="post" action="favorites.php" class="inline">
+            <input type="hidden" name="favStar" value="'.$star[0].'">
+            <button type="submit" name="favStar" value="'.$star[0].'" class="link-button">
+                '.$star[0].'
+            </button>
+            </form>';
         }
         
         ?>

@@ -12,25 +12,17 @@
         }
         else echo '<p style="color:red">passwords do not match</p>';
     }
+
+    echo "<p>". $_POST['uwu'] ."</p>";
 ?>
 
 
-
-<form method="post" action="test2.php">
-
-<label for="username"><strong>username:<br> </strong></label> 
-<input type="text" id="username" name="username"> 
-<br> <br>
-
-<label for="password"><strong>password:<br> </strong></label> 
-<input type="password" id="password1" name="password1">
-<br> <br>
-
-<label for="password2"><strong>confirm password:<br> </strong></label> 
-<input type="password" id="password2" name="password2">
-<br> <br>
-
-<input type="submit" name="create" value="create">
+<form method="post" action="test2.php" class="inline">
+  <input type="hidden" name="uwu" value="uwu">
+  <button type="submit" name="uwu" value="uwu" class="link-button">
+    This is a link that sends a POST request
+  </button>
+</form>
 
 
 </form>
