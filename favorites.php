@@ -55,7 +55,9 @@
             echo '<br>';
         }
         else {
-            echo "<h1>".$_SESSION["user"]."'s Favorites</h1>";
+            $username = str_replace("<", "&lt", $_SESSION["user"]);
+            $username = str_replace(">", "&gt", $username);
+            echo "<h1>".$username."'s Favorite Stars</h1>";
             echo "<p>select a star below to view info about it</p> <br>";
         }
         $favs = viewFavorites($_SESSION["user"]);
