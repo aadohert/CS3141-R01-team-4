@@ -137,3 +137,6 @@ table.star, tr.star, td.star {
     display: block;
     margin-bottom: 30px;
   }
+  .const{
+    color: black;
+  }
