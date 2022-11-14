@@ -8,9 +8,13 @@
         element.className = "dark-mode";
         const allElements = document.getElementsByTagName('*');
         for(const elements of allElements){
-            if(!elements.classList.contains("const")){
+            if(!elements.classList.contains("const") && !elements.classList.contains("link")){
                 elements.classList.add("a-style-dark");
                 elements.classList.remove("a-style");
+            }
+            else{
+                elements.classList.add("text-color-d")
+                elements.classList.remove("text-color-l")
             }
         }
         localStorage.setItem("dark-mode", 1);
@@ -19,9 +23,13 @@
         element.className = "light-mode";
         const allElements = document.getElementsByTagName('*');
         for(const elements of allElements){
-            if(!elements.classList.contains("const")){
+            if(!elements.classList.contains("const") && !elements.classList.contains("link")){
                 elements.classList.remove("a-style-dark");  
                 elements.classList.add("a-style");
+            }
+            else{
+                elements.classList.remove("text-color-d")
+                elements.classList.add("text-color-l")
             }
         }
         localStorage.removeItem("dark-mode");

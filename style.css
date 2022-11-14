@@ -6,6 +6,12 @@
     background-color: white;
     color: black !important;
 }
+.text-color-d{
+  color: white;
+}
+.text-color-l{
+  color: black;
+}
 .a-style:visited{
     text-decoration: none;
 }
