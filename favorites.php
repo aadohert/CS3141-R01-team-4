@@ -51,7 +51,7 @@
             echo "<p>Star can be found at <br>";
             echo 'Altitude: '.$starAlt.' Azimuth: '.$starAz.'</p>';
 
-            echo '<form method = "post" action = "favorites.php"> <button id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
+            echo '<form method = "post" action = "favorites.php"> <button class="const" id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
             echo '<br>';
         }
         else {
