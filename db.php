@@ -90,7 +90,7 @@ function removeFavorite ($user, $starName) {
 function viewFavorites ($user) {
     $dbh = connectDB();
 
-    $statement = $dbh->prepare("SELECT distinct name, r_ang, dec_ang, const, description FROM (t_stars join t_favorites on name = f_star) WHERE f_username = :username");
+    $statement = $dbh->prepare("SELECT distinct name, r_ang, dec_ang, const, description FROM (t_stars join t_favorites on name = f_star) WHERE f_username = :username ORDER BY name");
     $statement->bindParam(":username", $user);
     $result = $statement->execute();
     $stars = $statement->fetchAll();
@@ -121,8 +121,8 @@ function createUser($user, $passwd) {
 function checkUsername($user)
 {
     $dbh = connectDB();
-    $statement = $dbh->prepare("SELECT EXISTS(SELECT * from t_users WHERE user= :username);");
-    $statement->bindParam(":username", $user);
+    $statement = $dbh->prepare("SELECT EXISTS(SELECT * from t_users WHERE username= :user);");
+    $statement->bindParam(":user", $user);
     $result = $statement->execute();
     $statement->fetch();
     $row=$statement->fetch();

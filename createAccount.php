@@ -61,15 +61,15 @@
                             <span class="login-title"><strong>Create Account</strong></span>
                             <div class="login-input">
                                 <label for="username" class="login-input-label"><strong>Username</strong></label> 
-                                <input type="text" id="username" name="username" class="login-input-field" autocomplete="off"> 
+                                <input type="text" id="username" name="username" class="login-input-field const" autocomplete="off"> 
                             </div>
                             <div class="login-input">
                                 <label for="password" class="login-input-label"><strong>Password</strong></label> 
-                                <input type="password" id="password1" name="password1" class="login-input-field" autocomplete="off">
+                                <input type="password" id="password1" name="password1" class="login-input-field const" autocomplete="off">
                             </div>
                             <div class="login-input">
                                 <label for="password2" class="login-input-label"><strong>Confirm Password</strong></label> 
-                                <input type="password" id="password2" name="password2" class="login-input-field" autocomplete="off">
+                                <input type="password" id="password2" name="password2" class="login-input-field const" autocomplete="off">
                             </div>
                             <div class="login-button-div">
                                 <input type="submit" name="create" value="create" class="login-button">

@@ -27,7 +27,7 @@
     <body onload="themeChecker()">
             <?php 
                 printTopBanner();
-                if(!isset($_SESSION["user"])) header("LOCATION:Index.php");
+                if(!isset($_SESSION["user"])) header("LOCATION:login.php");
 
                 if (isset ($_POST["unfav"])) {
                     
@@ -51,7 +51,7 @@
             echo "<p>Star can be found at <br>";
             echo 'Altitude: '.$starAlt.' Azimuth: '.$starAz.'</p>';
 
-            echo '<form method = "post" action = "favorites.php"> <button id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
+            echo '<form method = "post" action = "favorites.php"> <button class="const" id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
             echo '<br>';
         }
         else {
@@ -67,7 +67,7 @@
             echo '
             <form method="post" action="favorites.php" class="inline">
             <input type="hidden" name="favStar" value="'.$star[0].'">
-            <button type="submit" name="favStar" value="'.$star[0].'" class="link-button">
+            <button type="submit" class="const" name="favStar" value="'.$star[0].'" class="link-button">
                 '.$star[0].'
             </button>
             </form>';

@@ -47,29 +47,29 @@
                         <!-- star name form -->
                             <form action = "Index.php" autocomplete="off">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" id="starName" name="starName" placeholder="Star Name" style="width: 150px">
+                                    <input class="form-control const"type="text" id="starName" name="starName" placeholder="Star Name" style="width: 150px">
                                 </div>
-                                <ul class="autofill"></ul>
+                                <ul class="autofill const"></ul>
                                 <div class="form-group">
-                                    <input class="form-control" type="submit" value="Calculate" name="Calculate"> 
+                                    <input class="form-control const" type="submit" value="Calculate" name="Calculate"> 
                                 </div>
                             </form>
                             <br>
                         <!-- RA and DEC form -->
                             <form action = "Index.php">
                             <div class="form-group">
-                                <input class="form-control" type="text" id="RA" name="RA" placeholder="RA in Degrees" style="width: 150px">
+                                <input class="form-control const" type="text" id="RA" name="RA" placeholder="RA in Degrees" style="width: 150px">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" id="DEC" name="DEC" placeholder="DEC in Degrees" style="width: 150px">
+                                <input class="form-control const" type="text" id="DEC" name="DEC" placeholder="DEC in Degrees" style="width: 150px">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="submit" value="Calculate" name="Calculate"> 
+                                <input class="form-control const" type="submit" value="Calculate" name="Calculate"> 
                             </div>  
                             </form>
                             <form action="Index.php" class="randomStar">
                                 <div>
-                                    <input class="form-control" type="submit" value="randomStar" name="randomStar">
+                                    <input class="form-control const" type="submit" value="randomStar" name="randomStar">
                                 </div>
                             </form>
                     </td>
@@ -101,8 +101,8 @@
                             }
                             //default if button hasn't been hit
                             else if(!isset($_GET["Calculate"])) {
-                                echo "<h1> Welcome to the Starfinder site!</h1>
-                                <p> Put a star's name or its right ascension and declination to find where it is relative to Houghton, Michigan </p>";
+                                echo "<h1 id='welcome'> Welcome to the Starfinder site!</h1>
+                                <p id='welcome-p'> Put a star's name or its right ascension and declination to find where it is relative to Houghton, Michigan </p>";
                             }
                             //runs if calculate is hit
                             else {
@@ -140,7 +140,7 @@
                                         if (isset($_SESSION["user"])) {
                                             $favorited = hasBeenFavorited($_SESSION["user"], $_SESSION["star"]);
 
-                                            if(0 == $favorited) echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
+                                            if(0 == $favorited) echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button class="const" id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
                                             else echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
                                         }
                                     }
@@ -167,6 +167,7 @@
                     if(i.toLowerCase().startsWith(autoFillInput.value.toLowerCase()) && autoFillInput.value != ""){
                         let listItem = document.createElement("li");
                         listItem.classList.add("list-items");
+                        listItem.classList.add("const");
                         listItem.style.cursor = "pointer";
                         listItem.setAttribute("onclick", "displayNames('" + i + "')");
                         let word = "<b>" + i.substring(0, autoFillInput.value.length) + "</b>";

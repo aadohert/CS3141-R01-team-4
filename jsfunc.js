@@ -6,14 +6,24 @@
     var element = document.body;
     if(document.getElementById('slider').checked){
         element.className = "dark-mode";
-        document.getElementById("ahrefI").className = "a-style-dark";
-        document.getElementById("ahrefF").className = "a-style-dark";
+        const allElements = document.getElementsByTagName('*');
+        for(const elements of allElements){
+            if(!elements.classList.contains("const")){
+                elements.classList.add("a-style-dark");
+                elements.classList.remove("a-style");
+            }
+        }
         localStorage.setItem("dark-mode", 1);
     }
     else{
         element.className = "light-mode";
-        document.getElementById("ahrefI").className = "a-style";
-        document.getElementById("ahrefF").className = "a-style";
+        const allElements = document.getElementsByTagName('*');
+        for(const elements of allElements){
+            if(!elements.classList.contains("const")){
+                elements.classList.remove("a-style-dark");  
+                elements.classList.add("a-style");
+            }
+        }
         localStorage.removeItem("dark-mode");
     }
 }
