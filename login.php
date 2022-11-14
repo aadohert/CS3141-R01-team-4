@@ -72,14 +72,14 @@
                             <span class="login-title"><strong>Login</strong></span>
                             <div class="login-input">
                                 <label for="username" class="login-input-label"><strong>Username</strong></label> 
-                                <input type="text" id="username" name="username" class="login-input-field"> 
+                                <input type="text" id="username" name="username" class="login-input-field const"> 
                             </div>
                             <div class="login-input">
                                 <label for="password" class="login-input-label"><strong>Password</strong></label> 
-                                <input type="password" id="password" name="password" class="login-input-field">
+                                <input type="password" id="password" name="password" class="login-input-field const">
                             </div>
                             <div class="login-button-div">
-                                <input type="submit" name="login" value="login" class="login-button">
+                                <input type="submit" name="login" value="login" class="login-button const">
                             </div>
                             <div>
                                 </p>   

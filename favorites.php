@@ -67,7 +67,7 @@
             echo '
             <form method="post" action="favorites.php" class="inline">
             <input type="hidden" name="favStar" value="'.$star[0].'">
-            <button type="submit" name="favStar" value="'.$star[0].'" class="link-button">
+            <button type="submit" class="const" name="favStar" value="'.$star[0].'" class="link-button">
                 '.$star[0].'
             </button>
             </form>';
