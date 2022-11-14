@@ -27,7 +27,7 @@
     <body onload="themeChecker()">
             <?php 
                 printTopBanner();
-                if(!isset($_SESSION["user"])) header("LOCATION:Index.php");
+                if(!isset($_SESSION["user"])) header("LOCATION:login.php");
 
                 if (isset ($_POST["unfav"])) {
                     
