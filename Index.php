@@ -154,7 +154,7 @@
                 </tr>
 
                 </div>
-            <td> <?php if (isset($_SESSION["user"])) echo '<a href=\'changePassword.php\'>Change Password</a>'; ?> </td>
+            <td> <?php if (isset($_SESSION["user"])) echo '<a class="link" href=\'changePassword.php\'>Change Password</a>'; ?> </td>
             </table>
 
             <script src="jsfunc.js"></script>
