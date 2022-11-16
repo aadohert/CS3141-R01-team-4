@@ -3,11 +3,13 @@
 <html lang="eng">
     <body>
         <?php
-             require "db.php"
+             require "db.php";
+             require "lst.php";
         ?>
         <?php
             echo "<br>". "Test 1: ". lstWhenNotGivenDate();
             echo "<br>". "Test 1.5: ". lstWhenGivenDate('now');
+            echo "<br>". "Test 1.75: ". LMST('now');
             echo "<br>". "Test 2: ". hourAngleWhenGivenRa(88.79, 'now');
             echo "<br>". "Test 3: ". (altitudeWhenGivenCoords(88.79, 7.40855, 'now')* (180/(pi())));
             echo "<br>". "Test 4: ". (azimuthWhenGivenCoords(88.79, 7.40855, 'now')* (180/(pi())));

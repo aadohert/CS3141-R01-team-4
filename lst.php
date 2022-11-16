@@ -39,6 +39,12 @@ function GMST($date) {
 function LMST($date) {
     $GMST = GMST($date);
     $LMST = $GMST - 88.5694;
+    while($LMST > 360) {
+        $LMST -= 360;
+    }
+    while($LMST < 0) {
+        $LMST += 360;
+    }
     return $LMST;
 }
 
