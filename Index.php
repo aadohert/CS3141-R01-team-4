@@ -141,7 +141,7 @@
                                             $favorited = hasBeenFavorited($_SESSION["user"], $_SESSION["star"]);
 
                                             if(0 == $favorited) echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button class="const" id = "fav" name = "fav" value = "fav">Favorite Star</button> </form>';
-                                            else echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
+                                            else echo '<form method = "post" action = "Index.php?starName='.str_replace(" ", "+", $_SESSION["star"]).'&Calculate=Calculate"> <button class="const" id = "unfav" name = "unfav" value = "unfav">Unfavorite Star</button> </form>';
                                         }
                                     }
                                     

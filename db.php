@@ -112,8 +112,10 @@ function createUser($user, $passwd) {
         return $user;
     }
     catch (Exception $e) {
-        //echo '<p style="color:red">the username "'.$user.'" is already taken, please try another one</p>';
-        //$dbh = null;
+        $username = str_replace("<", "&lt", $user);
+        $username = str_replace(">", "&gt", $username);
+        echo '<p style="color:red">the username "'.$username.'" is already taken, please try another one</p>';
+        $dbh = null;
         
     }
 }
