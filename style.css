@@ -146,3 +146,39 @@ table.star, tr.star, td.star {
   .const{
     color: black;
   }
+
+  .calculate-button{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: deepskyblue;
+  }
+
+  .calculate-button const{
+    width: 100%;
+    height: 40px;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    transition:all 1.5s ease;
+    border: none;
+    border-bottom: 3px solid grey;
+  }
+
+
+  .index-input-field{
+    width: 100%;
+    height: 40px;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    transition:all 1.5s ease;
+    border: none;
+    border-bottom: 3px solid grey;
+  }
+
+  .index-input-field:focus{
+    outline: none;
+    border-bottom: 3px solid rgb(10, 245, 10);
+  }
