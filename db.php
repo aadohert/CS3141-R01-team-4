@@ -123,13 +123,11 @@ function createUser($user, $passwd) {
 function checkUsername($user)
 {
     $dbh = connectDB();
-    $statement = $dbh->prepare("SELECT EXISTS(SELECT * from t_users WHERE username= :user);");
+    $statement = $dbh->prepare("SELECT EXISTS(SELECT * from t_users WHERE username= :user)");
     $statement->bindParam(":user", $user);
     $result = $statement->execute();
-    $statement->fetch();
-    $row=$statement->fetch();
-    $dbh=null;
-    return $row;
+    $check=$statement->fetch();
+    return $check;
 }
 
 function addCount($user)
@@ -138,25 +136,36 @@ function addCount($user)
         $statement = $dbh->prepare("UPDATE t_users SET counter = counter + 1 WHERE username = :user");
         $statement->bindParam(":user", $user);
         $statement->execute();
-        $count = $dbh->query("SELECT counter FROM t_users WHERE username = :user;");
+        $statement2 = $dbh->prepare("SELECT counter FROM t_users WHERE username = :user");
+        $statement2->bindParam(":user", $user);
+        $count = $statement2->execute();
+        $row=$statement2->fetch();
         $dbh = null;
-        return $count;
+        return $row;
 }
 
 function checkCount($user)
 {
     $dbh = connectDB();
-        //$count = $dbh->query("SELECT counter FROM t_users WHERE username = :user;");
-        //return $count;
+        $count = $dbh->prepare("SELECT counter FROM t_users WHERE username = :user");
+        $count->bindParam(":user", $user);
+        $result = $count->execute();
+        $row=$count->fetch();
+        $dbh = null;
+        return $row;
+        
 }
 
 
 function countZero($user)
 {
     $dbh = connectDB();
-        //$statement = $dbh->prepare("UPDATE t_users SET counter = 0 WHERE username = :user");
-        //return $statement;
+        $statement = $dbh->prepare("UPDATE t_users SET counter = 0 WHERE username = :user");
+        $statement->bindParam(":user", $user);
+        $statement->execute();
+        $dbh = null;
 }
+
 
 
 //updates the password of a user

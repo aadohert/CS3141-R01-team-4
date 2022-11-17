@@ -36,7 +36,7 @@
                     if(isset($_POST["login"])) {
                         $auth = authenticate($_POST["username"], $_POST["password"]);
                         $count = checkCount($_POST["username"]);
-                        if($auth[0] == 1 && $count <= 3) {
+                        if($auth[0] == 1 && $count[0] <= 3) {
                             $_SESSION["user"]=$auth[1];
                             header("LOCATION:Index.php");
                             $count = countZero($_POST["username"]);
@@ -47,19 +47,24 @@
                             if($checkUser[0] == 1) 
                             {
                                 $count = addCount($_POST["username"]);
-                                if ($count = 4)
+                                echo "Number of failed password attempts: " . $count[0];
+                                if ($count[0] == 4)
                                 {
-                                    echo '<p style="color:red"> account is locked for 10 seconds</p>' ;
-                                    $lockouttime = time(); 
+                                    echo '<p style="color:red"> account is locked for 20 seconds</p>' ;
+                                    $_SESSION["locked"] = time(); 
                                 }
-                                if ($count > 4)
+                                else if ($count[0] > 4)
                                 {
-                                    if(time() - $lockouttime < 10)
+                                    $difference = time() - $_SESSION["locked"];
+                                    if($difference < 20)
                                     {
-                                    echo '<p style="color:red"> account is still locked</p>' ;
+                                        $timeleft = 20 - $difference;
+                                        echo "<br />";
+                                        echo '<p style="color:red"> account is locked for ' . $timeleft . ' seconds';
                                     }else
                                     {
                                         $count = countZero($_POST["username"]);
+                                        echo '<p style="color:red"> Account is unlocked</p>' ;
                                     }
                                 }
                             }
