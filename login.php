@@ -67,7 +67,15 @@
                                     }else
                                     {
                                         $count = countZero($_POST["username"]);
+                                        $auth = authenticate($_POST["username"], $_POST["password"]);
+                                        $count = checkCount($_POST["username"]);
+                                        if($auth[0] == 1 && $count[0] <= 3) {
+                                             $_SESSION["user"]=$auth[1];
+                                             header("LOCATION:Index.php");
+                                            $count = countZero($_POST["username"]);
+                            }  
                                         echo '<p style="color:red"> Account is unlocked</p>' ;
+
                                     }
                                 }
                             }
