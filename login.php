@@ -47,7 +47,10 @@
                             if($checkUser[0] == 1) 
                             {
                                 $count = addCount($_POST["username"]);
+                                if ($count[0] != 1 && $count[0] != 0)
+                                {
                                 echo "Number of failed password attempts: " . $count[0];
+                                }
                                 if ($count[0] == 4)
                                 {
                                     echo '<p style="color:red"> account is locked for 20 seconds</p>' ;
