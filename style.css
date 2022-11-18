@@ -153,6 +153,7 @@ table.star, tr.star, td.star {
     border-radius: 10px;
     border: none;
     background-color: deepskyblue;
+    cursor: pointer;
   }
 
   .calculate-button const{
