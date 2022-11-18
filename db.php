@@ -431,7 +431,7 @@ function radiansToDegrees ($radians) {
     return $degrees;
 }
 
-
+// Gets the stars from the 
 function getStars(){
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT name FROM t_stars");
@@ -456,7 +456,14 @@ function isVisible($alt) {
     return true;
 }
 
-
+function isAdmin($user){
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT admin FROM t_users WHERE username= :user");
+    $statement->bindParam(":user", $user);
+    $result = $statement->execute();
+    $role = $statement->fetch();
+    return $role;
+}
 
 ?>
 </html> 
