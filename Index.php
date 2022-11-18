@@ -47,7 +47,7 @@
                         <!-- star name form -->
                             <form action = "Index.php" autocomplete="off">
                                 <div class="form-group">
-                                    <input class="index-input-field"type="text" id="starName" name="starName" placeholder="Star Name" style="width: 150px">
+                                    <input class="index-input-field const" type="text" id="starName" name="starName" placeholder="Star Name" style="width: 150px">
                                 </div>
                                 <ul class="autofill const"></ul>
                                 <div class="calculate-button">
@@ -58,10 +58,10 @@
                         <!-- RA and DEC form -->
                             <form action = "Index.php">
                             <div class="form-group">
-                                <input class="index-input-field" type="text" id="RA" name="RA" placeholder="RA in Degrees" style="width: 150px">
+                                <input class="index-input-field const" type="text" id="RA" name="RA" placeholder="RA in Degrees" style="width: 150px">
                             </div>
                             <div class="form-group">
-                                <input class="index-input-field" type="text" id="DEC" name="DEC" placeholder="DEC in Degrees" style="width: 150px">
+                                <input class="index-input-field const" type="text" id="DEC" name="DEC" placeholder="DEC in Degrees" style="width: 150px">
                             </div>
                             <div class="calculate-button">
                                 <input class="calculate-button const" type="submit" value="Calculate" name="Calculate"> 
