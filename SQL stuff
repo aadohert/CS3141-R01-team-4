@@ -50,7 +50,9 @@ insert into t_stars values ('Megrez', 183.8565, 57.0326,'Ursa Major', 'The name 
 insert into t_stars values ('Alioth', 193.5073, 55.9598,'Ursa Major', 'Alioth is the brightest star in Ursa Major!');
 insert into t_stars values ('Mizar', 200.8803, 54.9253,'Ursa Major', 'Mizar is the second star in the big dipper and has a famous star right next to it called Alcor!');
 insert into t_stars values ('Alkaid', 206.8852, 49.3133,'Ursa Major', 'Alkaid translates to end of the tail and it is the third-brightest star in Ursa Major!');
-
+insert into t_stars values ('Polaris', 37.9545, 89.2641,'Ursa Minor', 'Polaris is most commonly known as the north star and is the brightest star in the sky!');
+insert into t_stars values ('Kochab', 222.6764, 74.1555,'Ursa Minor', 'Kochab is used by amateur astronomers as a way to calibrate their telescopes!');
+insert into t_stars values ('Pherkad', 230.1822, 71.8340,'Ursa Minor', 'Pherkad is mentioned and featured in the Cthulu mythos that was popularized by H.P. Lovecraft');
 
 
 select * from t_users;
