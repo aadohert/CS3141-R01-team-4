@@ -21,7 +21,7 @@
             <hr>
             <table class="admin-page-org">
                 <col style="width:50%">
-                
+                <col style="width: 50%;"
                 <tr class="admin-star-input">
                     <td>
                         <form>

@@ -184,5 +184,6 @@ table.star, tr.star, td.star {
     border-bottom: 3px solid rgb(10, 245, 10);
   }
   .admin-star-input-data{
+    display: inline-block;
     vertical-align: middle;
   } 
