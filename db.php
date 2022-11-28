@@ -221,12 +221,16 @@ function printTopBanner() {
     '<div> 
         <table class="navbar-table" width="100%">
             <col style = "width: 70%">
-            <col style="width: 15%">
+            <col style="width: 10%">
+            <col style="width: 5%">
             <col style="width: 5%">
             <col style="width: 10%">
             <tr> 
                 <th id="Icon"><h1><a href= \'Index.php\' style="margin-left: 15px;" id="ahrefI" class="a-style">Star Finder</a></h1></th>
-                <th class="switch"><form><input type="checkbox" name="sldr" id="slider" onchange="darkmode()"></form></th>';
+                <th class="switch"><form><input type="checkbox" name="sldr" id="slider" onchange="darkmode()"></form></th>
+                <th id="navbar-admin" style="text-align: left"><h3><a href= \'admin.php\' class="a-style">Admin</a></h3></th>
+                ';
+
 
     if(isset($_SESSION["user"])){
         $username = str_replace("<", "&lt", $_SESSION["user"]);
