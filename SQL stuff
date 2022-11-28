@@ -43,6 +43,15 @@ insert into t_stars values ('Alnitak A',85.1896 ,29.1417,'orion', 'A very nice t
 insert into t_stars values ('Alnitak B', 85.1896,29.1417,'orion', 'A very nice triplet , A and B are quite close. C is nearly 60° away.');
 insert into t_stars values ('Algiebba',81.1192 ,35.9542,'orion', 'A close and difficult binary');
 insert into t_stars values ('Trapezium 1A',83.5642 ,80.8083,'orion', 'The most famous multiple star system in the heavens, the Trapezium. The very young stars that make up this quartet are generally considered by authorities to be about1300-1900 l.y. away.');
+insert into t_stars values ('Dubhe', 165.9320, 61.7510,'Ursa Major', 'Second Brightest Star in Ursa Major and 35th brightest star in the sky');
+insert into t_stars values ('Merak', 165.4603, 56.3824,'Ursa Major', 'The name Merak translates to the loins of the bear');
+insert into t_stars values ('Phecda', 178.4577, 53.6948,'Ursa Major', 'The name Phecda translates to thigh');
+insert into t_stars values ('Megrez', 183.8565, 57.0326,'Ursa Major', 'The name Megrez means root of the tail');
+insert into t_stars values ('Alioth', 193.5073, 55.9598,'Ursa Major', 'Alioth is the brightest star in Ursa Major!');
+insert into t_stars values ('Mizar', 200.8803, 54.9253,'Ursa Major', 'Mizar is the second star in the big dipper and has a famous star right next to it called Alcor!');
+insert into t_stars values ('Alkaid', 206.8852, 49.3133,'Ursa Major', 'Alkaid translates to end of the tail and it is the third-brightest star in Ursa Major!');
+
+
 
 select * from t_users;
 select * from t_stars;
