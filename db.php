@@ -461,7 +461,7 @@ function isVisible($alt) {
     }
     return true;
 }
-
+// Checks if a user is an admin
 function isAdmin($user){
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT admin FROM t_users WHERE username= :user");
@@ -470,7 +470,7 @@ function isAdmin($user){
     $role = $statement->fetch();
     return $role;
 }
-
+// Adds a star to the database based on the input requirements
 function addStar($name, $ra, $dec, $const, $desc){
     $dbh = connectDB();
     $statement = $dbh->prepare("INSERT INTO t_stars VALUES( :name, :ra, :dec, :const, :desc)");

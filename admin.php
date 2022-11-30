@@ -47,7 +47,8 @@
                             </div>
                             <?php
                                 if(isset($_POST["adminSubmit"])){
-                                    $_POST["adminStarname"];
+                                    addstar($_POST["adminStarName"], $_POST["adminRA"], $_POST["adminDEC"], $_POST["adminConst"], $_POST["adminDesc"]);
+                                    header("LOCATION: admin.php");
                                 }
                             ?>
                         </form>
