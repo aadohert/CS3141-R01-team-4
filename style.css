@@ -183,7 +183,16 @@ table.star, tr.star, td.star {
     outline: none;
     border-bottom: 3px solid rgb(10, 245, 10);
   }
-  .admin-star-input-data{
-    display: inline-block;
-    vertical-align: middle;
-  } 
+  .admin-container{
+    width: 100%;
+  }
+  .admin-star-align{
+    display: block;
+    margin : 0 auto;
+    margin-bottom: 20px;
+  }
+  .admin-description{
+    height: 75px;
+    width: 300px;
+    text-align: left;
+  }
