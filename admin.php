@@ -45,6 +45,11 @@
                                     <input type="submit" placeholder="Submit" class="admin-star-align" name="adminSubmit">
                                 </div>
                             </div>
+                            <?php
+                                if(isset($_POST["adminSubmit"])){
+                                    $_POST["adminStarname"];
+                                }
+                            ?>
                         </form>
                     </td>
                     <td>

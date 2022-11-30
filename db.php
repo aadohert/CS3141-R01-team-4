@@ -471,5 +471,15 @@ function isAdmin($user){
     return $role;
 }
 
+function addStar($name, $ra, $dec, $const, $desc){
+    $dbh = connectDB();
+    $statement = $dbh->prepare("INSERT INTO t_stars VALUES( :name, :ra, :dec, :const, :desc)");
+    $statement->bindParam(":name", $name);
+    $statement->bindParam(":ra", $ra);
+    $statement->bindParam(":dec", $dec);
+    $statement->bindParam(":const", $const);
+    $statement->bindParam(":desc", $desc);
+    $result = $statement->execute();
+}
 ?>
 </html> 
