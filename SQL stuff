@@ -53,7 +53,14 @@ insert into t_stars values ('Alkaid', 206.8852, 49.3133,'Ursa Major', 'Alkaid tr
 insert into t_stars values ('Polaris', 37.9545, 89.2641,'Ursa Minor', 'Polaris is most commonly known as the north star and is the brightest star in the sky!');
 insert into t_stars values ('Kochab', 222.6764, 74.1555,'Ursa Minor', 'Kochab is used by amateur astronomers as a way to calibrate their telescopes!');
 insert into t_stars values ('Pherkad', 230.1822, 71.8340,'Ursa Minor', 'Pherkad is mentioned and featured in the Cthulu mythos that was popularized by H.P. Lovecraft');
-
+insert into t_stars values ('Antares', 247.3519, -26.4320,'Scorpius', 'Antares is a special star that ranges in brightness in the night time sky!');
+insert into t_stars values ('Acrab', 241.3593, -19.8055,'Scorpius', 'This stars name is actually widely debated as to what it should be');
+insert into t_stars values ('Dschubba', 240.0834, -22.6217,'Scorpius', 'Dschubba is actually a binary star!');
+insert into t_stars values ('Sargas', 264.3297, -42.9978,'Scorpius', 'This star is one of the brighter ones in the night sky');
+insert into t_stars values ('Jabbah', 242.9989, -19.4606,'Scorpius', 'This is the star that caused the blue horsehead nebula!');
+insert into t_stars values ('Fang', 239.7130, -26.1141,'Scorpius', 'This is a trinary star system!');
+insert into t_stars values ('Alniyat', 245.2971, -25.5928,'Scorpius', 'Its some stars I guess');
+insert into t_stars values ('Paikauhale', 248.9706, -28.2160,'Scorpius', 'This star is 15 times the size of the sun!');
 
 select * from t_users;
 select * from t_stars;
