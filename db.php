@@ -103,7 +103,7 @@ function viewFavorites ($user) {
 function createUser($user, $passwd) {
     try {
         $dbh = connectDB();
-        $statement = $dbh->prepare("INSERT into t_users VALUES ( :username, sha2(:passwd, 256), 0 )");
+        $statement = $dbh->prepare("INSERT into t_users VALUES ( :username, sha2(:passwd, 256), 0, 0 )");
         $statement->bindParam(":username", $user);
         $statement->bindParam(":passwd", $passwd);
         $statement->execute();
