@@ -28,6 +28,18 @@
             <table class="admin-page-org" style="width: 100%;">
                 <col style="width:25%">
                 <col style="width:75%">
+                <tr>
+                    <th>
+                        <b>
+                            Add Star
+                        </b>
+                    </th>
+                    <th>
+                        <b>
+                            Add User Star
+                        </b>
+                    </th>
+                </tr>
                 <tr class="admin-star-input">
                     <td>
                         <form method="POST" action="admin.php">
@@ -59,12 +71,39 @@
                             ?>
                         </form>
                     </td>
-                    <td>
+                    <td style="vertical-align: top;">
+                    <table style="position: absolute;">
+                            <col style="width: 15%;">
+                            <col style="width: 10%;">
+                            <col style="width: 10%;">
+                            <col style="width: 15%;">
+                            <col style="width: 45%;">
+                            <col style="width: 5%;">
+                            <tr>
+                                <th style="text-align: left;">
+                                    Name
+                                </th>
+                                <th style="text-align: left;">
+                                    RA
+                                </th>
+                                <th style="text-align: left;">
+                                    Dec
+                                </th>
+                                <th style="text-align: left;">
+                                    Constellation
+                                </th>
+                                <th style="text-align: left;">
+                                    Description
+                                </th>
+                                <th style="text-align: left;">
+                                    Add Star
+                                </th>
+                            </tr>
                     <?php
                         $stars = getCustomerStars();
                         foreach($stars as $star){
                             $starInfo = getCustomStarInfo($star);
-                            echo '<table><tr>
+                            echo '<tr>
                             <form name="'.$star.'" method="POST" action="admin.php">
                             <td><p>Name: '.$starInfo[0].'</p></td>
                             <td><p>RA: '.$starInfo[1].'</p></td>
