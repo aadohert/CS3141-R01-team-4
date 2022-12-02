@@ -196,3 +196,7 @@ table.star, tr.star, td.star {
     width: 300px;
     text-align: left;
   }
+  .custom-star-input{
+    display: flex; 
+    justify-content: space-between;
+  }

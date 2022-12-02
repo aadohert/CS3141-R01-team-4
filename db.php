@@ -473,7 +473,7 @@ function isAdmin($user){
 // Adds a star to the database based on the input requirements
 function addStar($name, $ra, $dec, $const, $desc){
     $dbh = connectDB();
-    $statement = $dbh->prepare("INSERT INTO t_stars VALUES( :starName, :ra, :decl, :const, :descr)");
+    $statement = $dbh->prepare("INSERT INTO t_stars VALUES(:starName , :ra , :decl , :const , :descr)");
     $statement->bindParam(":starName", $name);
     $statement->bindParam(":ra", $ra);
     $statement->bindParam(":decl", $dec);

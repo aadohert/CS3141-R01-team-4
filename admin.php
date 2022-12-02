@@ -3,7 +3,12 @@
 <?php
     session_start();
     require "db.php";
-    
+    if(!(isset($_SESSION["user"])) ){
+        header('LOCATION: Index.php');
+    }
+    else if(isAdmin($_SESSION["user"]) == false){
+        header('LOCATION: Index.php');
+    }
     
     
 ?>    
@@ -21,11 +26,11 @@
             ?>
             <hr>
             <table class="admin-page-org" style="width: 100%;">
-                <col style="width:50%">
-                <col style="width:50%">
+                <col style="width:25%">
+                <col style="width:75%">
                 <tr class="admin-star-input">
                     <td>
-                        <form>
+                        <form method="POST" action="admin.php">
                             <div class="admin-container">
                                 <div class="admin-star-input-data">
                                     <input type="text" placeholder="Star Name" class="admin-star-align" name="adminStarName">
@@ -49,7 +54,7 @@
                             <?php
                                 if(isset($_POST["adminSubmit"])){
                                     addStar($_POST["adminStarName"], $_POST["adminRA"], $_POST["adminDEC"], $_POST["adminConst"], $_POST["adminDesc"]);
-                                    header("LOCATION: admin.php");
+                                    header('LOCATION: admin.php');
                                 }
                             ?>
                         </form>
@@ -59,22 +64,17 @@
                         $stars = getCustomerStars();
                         foreach($stars as $star){
                             $starInfo = getCustomStarInfo($star);
-                            $starAlt = round(radiansToDegrees(altitudeWhenGivenName($starInfo[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
-                            $starAz = round(radiansToDegrees(azimuthWhenGivenName($starInfo[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
-                            echo '<div class="custom-star-input>
-                            <form name="'.$star.'">
+                            echo '<div class="custom-star-input-class">
+                            <form name="'.$star.'"><div class="custom-star-input">
                             <p>'.$starInfo[0].'</p>
                             <p>'.$starInfo[1].'</p>
                             <p>'.$starInfo[2].'</p>';
                             if(!is_null($starInfo[3])) echo '<p>Constellation: '.$starInfo[3].' </p>';
                             echo '<p>'.$starInfo[4].'</p>
                             <input type="submit" name="'.$star.'Confirm">'.'
+                            </div>
                             </form>
                             </div>';
-                        }
-
-                        foreach($stars as $star){
-
                         }
                     ?>
                     </td>
