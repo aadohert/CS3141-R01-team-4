@@ -64,8 +64,8 @@
                             echo '<div class="custom-star-input>
                             <form name="'.$star.'">
                             <p>'.$starInfo[0].'</p>
-                            <p>'.$starAlt.'</p>
-                            <p>'.$starAz.'</p>';
+                            <p>'.$starInfo[1].'</p>
+                            <p>'.$starInfo[2].'</p>';
                             if(!is_null($starInfo[3])) echo '<p>Constellation: '.$starInfo[3].' </p>';
                             echo '<p>'.$starInfo[4].'</p>
                             <input type="submit" name="'.$star.'Confirm">'.'
