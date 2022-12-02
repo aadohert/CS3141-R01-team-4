@@ -64,17 +64,26 @@
                         $stars = getCustomerStars();
                         foreach($stars as $star){
                             $starInfo = getCustomStarInfo($star);
-                            echo '<div class="custom-star-input-class">
-                            <form name="'.$star.'"><div class="custom-star-input">
-                            <p>'.$starInfo[0].'</p>
-                            <p>'.$starInfo[1].'</p>
-                            <p>'.$starInfo[2].'</p>';
-                            if(!is_null($starInfo[3])) echo '<p>Constellation: '.$starInfo[3].' </p>';
-                            echo '<p>'.$starInfo[4].'</p>
-                            <input type="submit" name="'.$star.'Confirm">'.'
+                            echo '<table><tr>
+                            <form name="'.$star.'" method="POST" action="admin.php">
+                            <td><p>Name: '.$starInfo[0].'</p></td>
+                            <td><p>RA: '.$starInfo[1].'</p></td>
+                            <td><p>DEC: '.$starInfo[2].'</p></td>';
+                            if(!is_null($starInfo[3])) echo '<td><p>Constellation: '.$starInfo[3].' </p></td>';
+                            echo '<td><p> Desc: '.$starInfo[4].'</p></td>
+                            <td><input type="submit" name="'.$star.'Confirm"></td>'.'
                             </div>
                             </form>
-                            </div>';
+                            </tr>
+                            ';
+                        }
+                        echo '</table>';
+
+                        foreach($stars as $star){
+                            if(isset($_POST[$star."Confirm"])){
+                                $starInfo = getCustomStarInfo($star);
+                                addStar($starInfo[0], $starInfo[1], $starInfo[2], $starInfo[3], $starInfo[4]);
+                            }
                         }
                     ?>
                     </td>
