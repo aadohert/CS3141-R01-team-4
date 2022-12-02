@@ -464,7 +464,7 @@ function isVisible($alt) {
 // Checks if a user is an admin
 function isAdmin($user){
     $dbh = connectDB();
-    $statement = $dbh->prepare("SELECT admin FROM t_users WHERE username= :user");
+    $statement = $dbh->prepare("SELECT isAdmin FROM t_users WHERE username= :user");
     $statement->bindParam(":user", $user);
     $result = $statement->execute();
     $role = $statement->fetch();
@@ -473,13 +473,37 @@ function isAdmin($user){
 // Adds a star to the database based on the input requirements
 function addStar($name, $ra, $dec, $const, $desc){
     $dbh = connectDB();
-    $statement = $dbh->prepare("INSERT INTO t_stars VALUES( :name, :ra, :dec, :const, :desc)");
-    $statement->bindParam(":name", $name);
+    $statement = $dbh->prepare("INSERT INTO t_stars VALUES( :starName, :ra, :decl, :const, :descr)");
+    $statement->bindParam(":starName", $name);
     $statement->bindParam(":ra", $ra);
-    $statement->bindParam(":dec", $dec);
+    $statement->bindParam(":decl", $dec);
     $statement->bindParam(":const", $const);
-    $statement->bindParam(":desc", $desc);
+    $statement->bindParam(":descr", $desc);
     $result = $statement->execute();
+}
+// Gets all custom star names
+function getCustomerStars(){
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT name FROM t_c_stars");
+    $result = $statement->execute();
+    $names = $statement->fetchAll();
+    $stars = array();
+    $i = 0;
+    foreach($names as $name) {
+        $stars[$i] = $name[0];
+        $i++;
+    }
+    sort($stars);
+    return ($stars);
+}
+
+function getCustomStarInfo($starName){
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT * FROM t_c_stars WHERE name= :starName");
+    $statement->bindParam(":starName", $starName);
+    $result = $statement->execute();
+    $row = $statement->fetch();
+    return $row;
 }
 ?>
 </html> 
