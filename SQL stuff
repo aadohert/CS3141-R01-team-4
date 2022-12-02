@@ -66,6 +66,16 @@ insert into t_stars values ('Asellus Australis', 131.1713, 18.1549,'Cancer', 'Th
 insert into t_stars values ('Acubens', 134.6217, 11.8578,'Cancer', 'This star is 23 times more luminous than the sun!');
 insert into t_stars values ('Asellus Borealis', 130.8217, 21.4686,'Cancer', 'This star is only 171 million years old!');
 insert into t_stars values ('Tegmine', 123.0530, 17.6481,'Cancer', 'This star is actually 5 of them!');
+insert into t_stars values ('Regulus', 152.0929, 11.9672,'Leo', 'The brightest star in the Leo constellation. Its name is Latin for prince.');
+insert into t_stars values ('Denebola', 117.2649, 14.5721,'Leo', "Its name means Lion's Tail");
+insert into t_stars values ('Algieba', 154.9931, 19.8415,'Leo', "A binary star");
+insert into t_stars values ('Zosma', 168.5271, 20.5237,'Leo', "It's located about 58.4 light years from the sun");
+insert into t_stars values ('Algenubi', 146.4628, 23.7743,'Leo', "A bright giant, significantly larger and brighter than the sun");
+insert into t_stars values ('Adhafera', 154.1726, 23.4173,'Leo', "Relatively faint for a star visible to the naked eye");
+insert into t_stars values ('Iota Leonis', 170.9811, 10.5284,'Leo', "A triple star system");
+insert into t_stars values ('Tau Leonis', 171.9843, 2.8563,'Leo', "Frequently blocked from sight by the moon");
+insert into t_stars values ('54 Leo A', 163.9033, 24.7497,'Leo', "roughly 411 million years old");
+insert into t_stars values ('54 Leo B', 163.9052, 24.7490,'Leo', "The smaller in its binary system");
 
 
 select * from t_users;
