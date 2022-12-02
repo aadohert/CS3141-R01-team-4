@@ -3,9 +3,8 @@
 <?php
     session_start();
     require "db.php";
-    if(isAdmin($_SESSION["user"]) == false || !(isset($_SESSION["user"]))){
-        header('LOCATION: Index.php');
-    }
+    
+    
     
 ?>    
     <head>
@@ -49,16 +48,35 @@
                             </div>
                             <?php
                                 if(isset($_POST["adminSubmit"])){
-                                    addstar($_POST["adminStarName"], $_POST["adminRA"], $_POST["adminDEC"], $_POST["adminConst"], $_POST["adminDesc"]);
+                                    addStar($_POST["adminStarName"], $_POST["adminRA"], $_POST["adminDEC"], $_POST["adminConst"], $_POST["adminDesc"]);
                                     header("LOCATION: admin.php");
                                 }
                             ?>
                         </form>
                     </td>
                     <td>
-                        <div>
-                            <p>Test</p>
-                        </div>
+                    <?php
+                        $stars = getCustomerStars();
+                        foreach($stars as $star){
+                            $starInfo = getCustomStarInfo($star);
+                            $starAlt = round(radiansToDegrees(altitudeWhenGivenName($starInfo[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                            $starAz = round(radiansToDegrees(azimuthWhenGivenName($starInfo[0], 'now')), 2, PHP_ROUND_HALF_DOWN);
+                            echo '<div class="custom-star-input>
+                            <form name="'.$star.'">
+                            <p>'.$starInfo[0].'</p>
+                            <p>'.$starAlt.'</p>
+                            <p>'.$starAz.'</p>';
+                            if(!is_null($starInfo[3])) echo '<p>Constellation: '.$starInfo[3].' </p>';
+                            echo '<p>'.$starInfo[4].'</p>
+                            <input type="submit" name="'.$star.'Confirm">'.'
+                            </form>
+                            </div>';
+                        }
+
+                        foreach($stars as $star){
+
+                        }
+                    ?>
                     </td>
                 </tr>
             </table>
