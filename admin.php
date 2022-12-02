@@ -45,22 +45,22 @@
                         <form method="POST" action="admin.php">
                             <div class="admin-container">
                                 <div class="admin-star-input-data">
-                                    <input type="text" placeholder="Star Name" class="admin-star-align" name="adminStarName">
+                                    <input type="text" placeholder="Star Name" class="admin-star-align const" name="adminStarName">
                                 </div>
                                 <div class="admin-star-input-data">
-                                    <input type="text" placeholder="RA" class="admin-star-align" name="adminRA">
+                                    <input type="text" placeholder="RA" class="admin-star-align const" name="adminRA">
                                 </div>
                                 <div class="admin-star-input-data">
-                                    <input type="text" placeholder="DEC" class="admin-star-align" name="adminDEC">
+                                    <input type="text" placeholder="DEC" class="admin-star-align const" name="adminDEC">
                                 </div>
                                 <div class="admin-star-input-data">
-                                    <input type="text" placeholder="Const" class="admin-star-align" name="adminConst">
+                                    <input type="text" placeholder="Const" class="admin-star-align const" name="adminConst">
                                 </div>
                                 <div class="admin-star-input-data">
-                                    <textarea placeholder="Description" class="admin-star-align admin-description" name="adminDesc"></textarea>
+                                    <textarea placeholder="Description" class="admin-star-align admin-description const" name="adminDesc"></textarea>
                                 </div>
                                 <div class="admin-star-input-data">
-                                    <input type="submit" placeholder="Submit" class="admin-star-align" name="adminSubmit">
+                                    <input type="submit" placeholder="Submit" class="admin-star-align const" name="adminSubmit">
                                 </div>
                             </div>
                             <?php
@@ -110,7 +110,7 @@
                             <td><p>DEC: '.$starInfo[2].'</p></td>';
                             if(!is_null($starInfo[3])) echo '<td><p>Constellation: '.$starInfo[3].' </p></td>';
                             echo '<td><p> Desc: '.$starInfo[4].'</p></td>
-                            <td><input type="submit" name="'.$star.'Confirm"></td>'.'
+                            <td><input type="submit" name="'.$star.'Confirm" class="const"></td>'.'
                             </div>
                             </form>
                             </tr>
