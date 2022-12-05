@@ -81,6 +81,11 @@ insert into t_stars values ('Zavijava', 177.6738, 1.7647,'Virgo', "This star is 
 insert into t_stars values ('Porrima', 190.4152, -1.4494,'Virgo', "This is a binary star system where the two stars periodically are able to be seen with a normal telescope!");
 insert into t_stars values ('Auva', 193.9009, 3.3975,'Virgo', "This is one of the farther stars in this constellation at 190 light years away!");
 insert into t_stars values ('Vindemiatrix', 195.5442, 10.9592,'Virgo', "This is the third brightest star in Virgo!");
+insert into t_stars values ('Castor', 113.6494, 31.8885,'Gemini', "This star is actually six of them!");
+insert into t_stars values ('Pollux', 116.3290, 28.0262,'Gemini', "This is the closest giant star to the star!");
+insert into t_stars values ('Alhena', 99.4280, 16.3993,'Gemini', "This star is 123 times brighter than the sun!");
+insert into t_stars values ('Wasat', 110.0307, 21.9823,'Gemini', "This star is covered up by the sun, moon, and planets a lot!");
+
 
 
 
