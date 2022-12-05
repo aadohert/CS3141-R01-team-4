@@ -65,7 +65,7 @@
                             </div>
                             <?php
                                 if(isset($_POST["adminSubmit"])){
-                                    if(!exists($_POST["adminStarName"])){
+                                    if(!exists($_POST["adminStarName"]) && !empty($_POST["adminStarName"]) && !empty($_POST["adminRA"]) && !empty($_POST["adminDEC"]) && !empty($_POST["adminConst"]) && !empty($_POST["adminDesc"])){
                                         addStar($_POST["adminStarName"], $_POST["adminRA"], $_POST["adminDEC"], $_POST["adminConst"], $_POST["adminDesc"]);
                                     }
                                     header('LOCATION: admin.php');
