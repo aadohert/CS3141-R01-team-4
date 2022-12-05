@@ -454,7 +454,7 @@ function getStars(){
     sort($stars);
     return ($stars);
 }
-
+// Checks if a star is visible
 function isVisible($alt) {
     if($alt < 0) {
         return false;
@@ -505,7 +505,7 @@ function getCustomStarInfo($starName){
     $row = $statement->fetch();
     return $row;
 }
-
+// Removes the custom star from the custom star table
 function removeCustomStar($starName){
     $dbh = connectDB();
     $statement = $dbh->prepare("DELETE from t_c_stars where name= :star");
