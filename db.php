@@ -496,7 +496,7 @@ function getCustomerStars(){
     sort($stars);
     return ($stars);
 }
-
+// Gets the info about the custom star
 function getCustomStarInfo($starName){
     $dbh = connectDB();
     $statement = $dbh->prepare("SELECT * FROM t_c_stars WHERE name= :starName");
@@ -504,6 +504,13 @@ function getCustomStarInfo($starName){
     $result = $statement->execute();
     $row = $statement->fetch();
     return $row;
+}
+
+function removeCustomStar($starName){
+    $dbh = connectDB();
+    $statement = $dbh->prepare("DELETE from t_c_stars where name= :star");
+    $statement->bindParam(":star", $starName);
+    $result = $statement->execute();
 }
 ?>
 </html> 

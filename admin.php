@@ -77,8 +77,9 @@
                             <col style="width: 10%;">
                             <col style="width: 10%;">
                             <col style="width: 15%;">
-                            <col style="width: 45%;">
+                            <col style="width: 40%;">
                             <col style="width: 5%;">
+                            <col style="width: 5%">
                             <tr>
                                 <th style="text-align: left;">
                                     Name
@@ -111,6 +112,7 @@
                             if(!is_null($starInfo[3])) echo '<td><p>Constellation: '.$starInfo[3].' </p></td>';
                             echo '<td><p> Desc: '.$starInfo[4].'</p></td>
                             <td><input type="submit" name="'.$star.'Confirm" class="const"></td>'.'
+                            <td><input type="submit" name;"'.$star.'Remove" class="const"></td>
                             </div>
                             </form>
                             </tr>
@@ -122,6 +124,9 @@
                             if(isset($_POST[$star."Confirm"])){
                                 $starInfo = getCustomStarInfo($star);
                                 addStar($starInfo[0], $starInfo[1], $starInfo[2], $starInfo[3], $starInfo[4]);
+                            }
+                            if(isset($_POST[$star."Remove"])){
+                                removeCustomStar($star);
                             }
                         }
                     ?>
