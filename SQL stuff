@@ -76,6 +76,12 @@ insert into t_stars values ('Iota Leonis', 170.9811, 10.5284,'Leo', "A triple st
 insert into t_stars values ('Tau Leonis', 171.9843, 2.8563,'Leo', "Frequently blocked from sight by the moon");
 insert into t_stars values ('54 Leo A', 163.9033, 24.7497,'Leo', "roughly 411 million years old");
 insert into t_stars values ('54 Leo B', 163.9052, 24.7490,'Leo', "The smaller in its binary system");
+insert into t_stars values ('Spica', 201.2982, -11.1613,'Virgo', "This is one of the top 20 brightest stars in the sky!");
+insert into t_stars values ('Zavijava', 177.6738, 1.7647,'Virgo', "This star is near the end of its life");
+insert into t_stars values ('Porrima', 190.4152, -1.4494,'Virgo', "This is a binary star system where the two stars periodically are able to be seen with a normal telescope!");
+insert into t_stars values ('Auva', 193.9009, 3.3975,'Virgo', "This is one of the farther stars in this constellation at 190 light years away!");
+insert into t_stars values ('Vindemiatrix', 195.5442, 10.9592,'Virgo', "This is the third brightest star in Virgo!");
+
 
 
 select * from t_users;
