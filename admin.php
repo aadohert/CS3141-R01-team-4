@@ -65,7 +65,9 @@
                             </div>
                             <?php
                                 if(isset($_POST["adminSubmit"])){
-                                    addStar($_POST["adminStarName"], $_POST["adminRA"], $_POST["adminDEC"], $_POST["adminConst"], $_POST["adminDesc"]);
+                                    if(!exists($_POST["adminStarName"])){
+                                        addStar($_POST["adminStarName"], $_POST["adminRA"], $_POST["adminDEC"], $_POST["adminConst"], $_POST["adminDesc"]);
+                                    }
                                     header('LOCATION: admin.php');
                                 }
                             ?>
