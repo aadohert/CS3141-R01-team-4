@@ -111,13 +111,13 @@
                             $starInfo = getCustomStarInfo($star);
                             echo '<tr>
                             <form name="'.$star.'" method="POST" action="admin.php">
-                            <td><p>Name: '.$starInfo[0].'</p></td>
-                            <td><p>RA: '.$starInfo[1].'</p></td>
-                            <td><p>DEC: '.$starInfo[2].'</p></td>';
-                            if(!is_null($starInfo[3])) echo '<td><p>Constellation: '.$starInfo[3].' </p></td>';
-                            echo '<td><p> Desc: '.$starInfo[4].'</p></td>
-                            <td><input type="submit" name="'.$star.'Confirm" class="const"></td>'.'
-                            <td><input type="submit" name="'.$star.'Remove" class="const"></td>
+                            <td class="custom-star-margin"><p>Name: '.$starInfo[0].'</p></td>
+                            <td class="custom-star-margin"><p>RA: '.$starInfo[1].'</p></td>
+                            <td class="custom-star-margin"><p>DEC: '.$starInfo[2].'</p></td>';
+                            if(!is_null($starInfo[3])) echo '<td class="custom-star-margin"><p>Constellation: '.$starInfo[3].' </p></td>';
+                            echo '<td class="custom-star-margin"><p> Desc: '.$starInfo[4].'</p></td>
+                            <td class="custom-star-margin"><input type="submit" name="'.$star.'Confirm" class="const"></td>'.'
+                            <td class="custom-star-margin"><input type="submit" name="'.$star.'Remove" class="const"></td>
                             </div>
                             </form>
                             </tr>

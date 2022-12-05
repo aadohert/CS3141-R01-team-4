@@ -200,3 +200,6 @@ table.star, tr.star, td.star {
     display: flex; 
     justify-content: space-between;
   }
+  .custom-star-margin{
+    margin-bottom: 20px;
+  }
