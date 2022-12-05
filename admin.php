@@ -123,7 +123,9 @@
                         foreach($stars as $star){
                             if(isset($_POST[$star."Confirm"])){
                                 $starInfo = getCustomStarInfo($star);
-                                addStar($starInfo[0], $starInfo[1], $starInfo[2], $starInfo[3], $starInfo[4]);
+                                if(!exists($star)){
+                                    addStar($starInfo[0], $starInfo[1], $starInfo[2], $starInfo[3], $starInfo[4]);
+                                }
                             }
                             if(isset($_POST[$star."Remove"])){
                                 removeCustomStar($star);

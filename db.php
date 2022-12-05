@@ -512,5 +512,19 @@ function removeCustomStar($starName){
     $statement->bindParam(":star", $starName);
     $result = $statement->execute();
 }
+// Checks if a star already exists
+function exists($starName){
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT count(*) FROM t_stars WHERE name= :starName");
+    $statement->bindParam(":starName", $starName);
+    $statement->execute();
+    $row = $statement->fetch();
+    if($row[0] == 1){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 ?>
 </html> 
