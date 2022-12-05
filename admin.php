@@ -101,6 +101,9 @@
                                 <th style="text-align: left;">
                                     Add Star
                                 </th>
+                                <th style="text-align: left;">
+                                    Remove Star
+                                </th>
                             </tr>
                     <?php
                         $stars = getCustomerStars();
@@ -134,7 +137,6 @@
                             }
                             if(isset($_POST[$star."Remove"])){
                                 removeCustomStar($star);
-                                header("Refresh:0");
                             }
                         }
                     ?>
