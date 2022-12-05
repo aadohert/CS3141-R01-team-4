@@ -468,7 +468,7 @@ function isAdmin($user){
     $statement->bindParam(":user", $user);
     $result = $statement->execute();
     $role = $statement->fetch();
-    return $role;
+    return $role[0];
 }
 // Adds a star to the database based on the input requirements
 function addStar($name, $ra, $dec, $const, $desc){

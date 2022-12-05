@@ -112,7 +112,7 @@
                             if(!is_null($starInfo[3])) echo '<td><p>Constellation: '.$starInfo[3].' </p></td>';
                             echo '<td><p> Desc: '.$starInfo[4].'</p></td>
                             <td><input type="submit" name="'.$star.'Confirm" class="const"></td>'.'
-                            <td><input type="submit" name;"'.$star.'Remove" class="const"></td>
+                            <td><input type="submit" name="'.$star.'Remove" class="const"></td>
                             </div>
                             </form>
                             </tr>
@@ -127,6 +127,7 @@
                             }
                             if(isset($_POST[$star."Remove"])){
                                 removeCustomStar($star);
+                                header("Refresh:0");
                             }
                         }
                     ?>
