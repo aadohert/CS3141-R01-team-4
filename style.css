@@ -209,9 +209,11 @@ table.star, tr.star, td.star {
   }
 
   .favorite-button{
-    width:6%;
+    width: 150px;
     height: 30px;
     border-radius: 10px;
     border: none;
     background-color: deepskyblue;
   }
+
+  
