@@ -86,7 +86,10 @@ insert into t_stars values ('Pollux', 116.3290, 28.0262,'Gemini', "This is the c
 insert into t_stars values ('Alhena', 99.4280, 16.3993,'Gemini', "This star is 123 times brighter than the sun!");
 insert into t_stars values ('Wasat', 110.0307, 21.9823,'Gemini', "This star is covered up by the sun, moon, and planets a lot!");
 
-
+insert into t_stars values ("Alpheratz", 2.0969, 29.0904, "Andromeda", "Represents the head of Andromeda");
+insert into t_stars values ("Mirach", 17.4330, 35.6206, "Andromeda", 'Its name translates to "The Loins"');
+insert into t_stars values ("Almach", 30.9748, 42.3297, "Andromeda", "An orange-hued bright giant star");
+insert into t_stars values ("Delta Andromedae", 9.8320, 30.8610, "Andromeda", "A triple star system");
 
 
 select * from t_users;
