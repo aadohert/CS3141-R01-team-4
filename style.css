@@ -203,3 +203,15 @@ table.star, tr.star, td.star {
   .custom-star-margin{
     margin-bottom: 20px;
   }
+
+  .favorite-button-div{
+    margin-top: 30px;
+  }
+
+  .favorite-button{
+    width:6%;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: deepskyblue;
+  }
