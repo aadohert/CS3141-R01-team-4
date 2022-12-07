@@ -28,7 +28,7 @@
             ?><hr><?php
             
                     if(isset($_POST["changePassword"])) {
-                        if($_SESSION["user"] != $_POST["username"]) echo '<p>'.$_SESSION["user"].'</p><p style="color:red">username incorrect</p>';
+                        if($_SESSION["user"] != $_POST["username"]) echo '<p style="color:red">username incorrect</p>';
                         else { 
                             $auth = authenticate($_POST["username"], $_POST["password"]);
                             if($auth[0] == 1) {
@@ -74,7 +74,7 @@
         <br> <br>
 
 
-<input type="submit" name="changePassword" value="changePassword">
+<input type="submit" class="const"  name="changePassword" value="changePassword">
 
 </form>
 <p> 
