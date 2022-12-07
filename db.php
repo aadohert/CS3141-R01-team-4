@@ -222,16 +222,28 @@ function printTopBanner() {
         <table class="navbar-table" width="100%">
             <col style = "width: 15%">
             <col style = "width: 55%">
-            <col style="width: 10%">
-            <col style="width: 5%">
+            <col style="width: 10%">';
+            if(isset($_SESSION["user"])){
+                if(isAdmin($_SESSION["user"])){
+                    echo '
+                    <col style="width: 5%">';
+                }
+                
+            }
+            echo '
             <col style="width: 5%">
             <col style="width: 10%">
             <tr> 
                 <th id="Icon"><h1><a href= \'Index.php\' style="margin-left: 15px;" id="ahrefI" class="a-style">Star Finder</a>    </h1></th>
                 <th style="text-align: left;"> <a href = "About.php" ><img src="hukees.png" height="50"> </a></th>
-                <th class="switch"><form><input type="checkbox" name="sldr" id="slider" onchange="darkmode()"></form></th>
-                <th id="navbar-admin" style="text-align: left"><h3><a href= \'admin.php\' class="a-style">Admin</a></h3></th>
-                ';
+                <th class="switch"><form><input type="checkbox" name="sldr" id="slider" onchange="darkmode()"></form></th>';
+                if(isset($_SESSION["user"])){
+                    if(isAdmin($_SESSION["user"])){
+                        echo '
+                        <th id="navbar-admin" style="text-align: left"><h3><a href= \'admin.php\' class="a-style">Admin</a></h3></th>
+                        ';
+                    }
+                }
 
 
     if(isset($_SESSION["user"])){
